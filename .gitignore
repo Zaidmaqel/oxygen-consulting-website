@@ -527,3 +527,8 @@ _UpgradeReport_Files/
 *.bak
 *.backup
 
+# Social media video binaries (large media files)
+social/*.mp4
+**/social/*.mp4
+
+
