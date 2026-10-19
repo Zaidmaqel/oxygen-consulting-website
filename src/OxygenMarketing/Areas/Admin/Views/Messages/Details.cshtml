@@ -1,0 +1,78 @@
+@model OxygenMarketing.Models.ContactMessage
+@{
+    ViewData["Title"] = $"Message #{Model.Id} — {Model.Name}";
+}
+
+<div class="mb-4">
+  <a asp-action="Index" class="btn btn-sm btn-outline-secondary mb-3">← Back to Inbox</a>
+  <div class="d-flex justify-content-between align-items-center">
+    <h1 class="h3 fw-bold text-white m-0">Inquiry Details #@Model.Id</h1>
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post" onsubmit="return confirm('Delete this inquiry permanently?');">
+      @Html.AntiForgeryToken()
+      <button type="submit" class="btn btn-sm btn-outline-danger">Delete Message</button>
+    </form>
+  </div>
+</div>
+
+<div class="row g-4">
+  <div class="col-lg-8">
+    <!-- Message Body -->
+    <div class="admin-card mb-4">
+      <h2 class="h5 fw-bold text-white mb-3">Client Message</h2>
+      <div class="p-3 rounded-3 bg-dark border border-secondary border-opacity-25" style="white-space: pre-wrap; line-height: 1.8;">
+        @Model.Message
+      </div>
+    </div>
+
+    <!-- Campaign Studio Prefill Bundle Details (if applicable) -->
+    @if (!string.IsNullOrEmpty(Model.CampaignDetails))
+    {
+      <div class="admin-card">
+        <h2 class="h5 fw-bold text-gold mb-3">✦ Campaign Studio Requested Bundle</h2>
+        <div class="p-3 rounded-3 bg-dark border border-warning border-opacity-25 font-monospace small" style="white-space: pre-wrap;">
+          @Model.CampaignDetails
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="col-lg-4">
+    <!-- Sender Metadata -->
+    <div class="admin-card">
+      <h2 class="h5 fw-bold text-white mb-3">Sender Information / بيانات العميل</h2>
+
+      <ul class="list-unstyled mb-0" style="line-height: 2;">
+        <li class="mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+          <span class="field-hint-label">اسم العميل • Sender Name</span>
+          <strong class="text-white fs-6">@Model.Name</strong>
+        </li>
+        <li class="mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+          <span class="field-hint-label">رقم الهاتف • Phone Number</span>
+          <a href="tel:@Model.Phone" class="text-gold-light fw-bold text-decoration-none fs-6">@Model.Phone</a>
+        </li>
+        <li class="mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+          <span class="field-hint-label">البريد الإلكتروني • Email Address</span>
+          <a href="mailto:@Model.Email" class="text-gold-light text-decoration-none">@Model.Email</a>
+        </li>
+        <li class="mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+          <span class="field-hint-label">اسم الشركة / البراند • Company / Brand</span>
+          <span class="text-white">@(Model.Company ?? "None specified")</span>
+        </li>
+        <li class="mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+          <span class="field-hint-label">الخدمة المطلوبة • Service Interested In</span>
+          <span class="badge bg-warning bg-opacity-25 text-gold-light px-2 py-1 border border-warning border-opacity-25">
+            @(Model.Service != null ? $"{Model.Service.TitleEn} ({Model.Service.TitleAr})" : "General Inquiry")
+          </span>
+        </li>
+        <li class="mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+          <span class="field-hint-label">تاريخ ووقت الإرسال • Submission Timestamp</span>
+          <span class="text-white">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss UTC")</span>
+        </li>
+        <li>
+          <span class="field-hint-label">عنوان الـ IP • Client IP Address</span>
+          <code class="text-white-50">@(Model.IpAddress ?? "N/A")</code>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

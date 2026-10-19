@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@ViewData["Title"] — Oxygen Portal</title>
+  <!-- Non-negotiable SEO restriction for staff portal -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+  <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/fonts/fonts.css" asp-append-version="true" />
+
+  <style>
+    :root {
+      --dark-bg: #14110C;
+      --dark-card: #1D1812;
+      --dark-border: rgba(199, 154, 59, 0.28);
+      --gold: #C79A3B;
+      --gold-light: #FBD965;
+      --cream: #FAF6EE;
+      --muted: #D8CFBF;
+    }
+    body {
+      background-color: var(--dark-bg);
+      color: var(--cream);
+      font-family: 'Montserrat', 'Cairo', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+    .text-muted, small.text-muted, label.text-muted, p.text-muted, span.text-muted {
+      color: #D8CFBF !important;
+      font-weight: 500;
+    }
+    .form-label, label {
+      color: #FAF6EE !important;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    .field-hint-label {
+      color: #FBD965 !important;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: 0.25rem;
+    }
+    .table th {
+      color: #FBD965 !important;
+      font-weight: 700;
+      border-color: rgba(199, 154, 59, 0.3) !important;
+    }
+    .admin-sidebar {
+      width: 260px;
+      background: #0E0C08;
+      border-right: 1px solid var(--dark-border);
+      min-height: 100vh;
+    }
+    .admin-nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.8rem 1.2rem;
+      color: #DDD4C4;
+      text-decoration: none;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      margin-bottom: 0.3rem;
+    }
+    .admin-nav-link:hover, .admin-nav-link.active {
+      color: var(--gold-light);
+      background: rgba(199, 154, 59, 0.2);
+    }
+    .admin-card {
+      background: var(--dark-card);
+      border: 1px solid var(--dark-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+    .form-control, .form-select {
+      background-color: #262018;
+      border-color: var(--dark-border);
+      color: #FFFFFF;
+    }
+    .form-control:focus, .form-select:focus {
+      background-color: #2F271E;
+      border-color: var(--gold-light);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(251, 217, 101, 0.25);
+    }
+    .btn-gold-admin {
+      background: linear-gradient(90deg, #A67422, #C79A3B, #FBD965);
+      color: #14110C;
+      font-weight: 700;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1.2rem;
+      text-decoration: none;
+    }
+    .btn-gold-admin:hover {
+      background: #FBD965;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar p-3 d-flex flex-column justify-content-between">
+      <div>
+        <!-- Logo -->
+        <div class="py-3 px-2 mb-4 border-bottom border-secondary border-opacity-25">
+          <img src="~/images/logo-official-dark.png" alt="Oxygen Consulting & Marketing" style="height: 42px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(199, 154, 59, 0.25));" />
+          <span class="badge bg-warning bg-opacity-25 text-gold-light mt-2 d-block text-uppercase" style="letter-spacing: 0.1em; font-size: 0.7rem;">Staff Management Portal</span>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav>
+          <a asp-controller="Dashboard" asp-action="Index" class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Dashboard" ? "active" : "")">
+            <span>📊</span> Dashboard
+          </a>
+          <a asp-controller="Messages" asp-action="Index" class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Messages" ? "active" : "")">
+            <span>✉️</span> Inbound Messages
+          </a>
+          <a asp-controller="Services" asp-action="Index" class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Services" ? "active" : "")">
+            <span>💼</span> Manage Services
+          </a>
+          <a asp-controller="CaseStudies" asp-action="Index" class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "CaseStudies" ? "active" : "")">
+            <span>📁</span> Case Studies
+          </a>
+          <a asp-controller="Settings" asp-action="Index" class="admin-nav-link @(ViewContext.RouteData.Values["controller"]?.ToString() == "Settings" ? "active" : "")">
+            <span>⚙️</span> Site Settings
+          </a>
+        </nav>
+      </div>
+
+      <!-- User & Logout -->
+      <div class="pt-3 border-top border-secondary border-opacity-25">
+        <a href="/" target="_blank" class="admin-nav-link text-white mb-2">
+          <span>↗️</span> View Public Website
+        </a>
+        <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+          @Html.AntiForgeryToken()
+          <button type="submit" class="btn btn-sm btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2">
+            <span>🚪</span> Sign Out
+          </button>
+        </form>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow-1 p-4 p-md-5 overflow-auto">
+      @if (TempData["AdminSuccess"] != null)
+      {
+        <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+          @TempData["AdminSuccess"]
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      }
+
+      @RenderBody()
+    </main>
+  </div>
+
+  <script src="~/lib/bootstrap/bootstrap.bundle.min.js"></script>
+  @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

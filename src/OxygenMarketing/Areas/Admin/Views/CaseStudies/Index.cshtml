@@ -1,0 +1,81 @@
+@model List<OxygenMarketing.Models.CaseStudy>
+@{
+    ViewData["Title"] = "Case Studies Management";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="h3 fw-bold text-white mb-1">Case Studies & Performance</h1>
+    <p class="text-muted small m-0">Manage empirical client campaign performance benchmarks, KPIs, and imagery.</p>
+  </div>
+  <a asp-action="Create" class="btn btn-gold-admin">
+    <span>+</span> Add Case Study
+  </a>
+</div>
+
+<div class="admin-card">
+    <div class="alert alert-dark border-secondary p-3 mb-3 text-white small d-flex align-items-center justify-content-between" style="background: rgba(22, 17, 12, 0.9);">
+      <span>💡 <strong>مؤشرات الأداء (KPIs):</strong> الأرقام المعروضة في هذا الجدول تظهر مباشرة على الصفحة الرئيسية وفي قسم أعمالنا لإبراز قوة ونتائج حملات أكسجين.</span>
+      <span class="badge bg-warning bg-opacity-25 text-gold-light border border-warning border-opacity-50 px-3 py-1">مباشر على الموقع</span>
+    </div>
+    <div class="table-responsive">
+      <table class="table table-dark table-hover align-middle mb-0">
+        <thead>
+          <tr class="small">
+            <th style="color: #FBD965;">#</th>
+            <th style="color: #FBD965;">Cover / الغلاف</th>
+            <th style="color: #FBD965;">Sector / القطاع</th>
+            <th style="color: #FBD965;">Title / العنوان</th>
+            <th style="color: #FBD965;">Budget / الميزانية</th>
+            <th style="color: #FBD965;">Reach / الوصول</th>
+            <th style="color: #FBD965;">Convs / المحادثات</th>
+            <th style="color: #FBD965;">CPC / تكلفة النقرة</th>
+            <th style="color: #FBD965;">Status / الحالة</th>
+            <th class="text-end" style="color: #FBD965;">Actions / إجراءات</th>
+          </tr>
+        </thead>
+      <tbody>
+        @foreach (var c in Model)
+        {
+          <tr>
+            <td class="fw-bold">@c.SortOrder</td>
+            <td>
+              <img src="@(c.ImagePath ?? "/images/cases/case-clothing.jpg")" alt="@c.TitleEn" width="60" height="40" class="rounded object-fit-cover" />
+            </td>
+            <td><span class="badge bg-secondary">@c.IndustryEn</span></td>
+            <td class="fw-bold text-white">@c.TitleEn</td>
+            <td class="small">@(c.Budget.HasValue ? $"${c.Budget.Value:N0}" : "—")</td>
+            <td class="small">@(c.Reach.HasValue ? c.Reach.Value.ToString("N0") : "—")</td>
+            <td class="small">@(c.Conversations.HasValue ? c.Conversations.Value.ToString("N0") : "—")</td>
+            <td class="small">@(c.Cpc.HasValue ? $"${c.Cpc.Value:F2}" : "—")</td>
+            <td>
+              @if (c.IsActive)
+              {
+                <span class="badge bg-success">Active</span>
+              }
+              else
+              {
+                <span class="badge bg-secondary">Draft</span>
+              }
+              @if (c.IsFeatured)
+              {
+                <span class="badge bg-warning bg-opacity-25 text-warning ms-1">Featured</span>
+              }
+            </td>
+            <td class="text-end">
+              <div class="d-flex justify-content-end gap-1">
+                <a asp-action="Edit" asp-route-id="@c.Id" class="btn btn-sm btn-outline-warning">
+                  Edit
+                </a>
+                <form asp-action="Delete" asp-route-id="@c.Id" method="post" onsubmit="return confirm('Delete this case study permanently? / هل أنت متأكد من الحذف؟');" class="d-inline">
+                  @Html.AntiForgeryToken()
+                  <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

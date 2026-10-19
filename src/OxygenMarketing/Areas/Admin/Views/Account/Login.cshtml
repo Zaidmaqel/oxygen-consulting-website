@@ -1,0 +1,98 @@
+@model OxygenMarketing.Areas.Admin.ViewModels.AdminLoginViewModel
+@{
+    Layout = null;
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Staff Portal Login — Oxygen Marketing</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+  <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="~/fonts/fonts.css" />
+  <style>
+    body {
+      background: radial-gradient(circle at 50% 40%, #291F13 0%, #100D09 80%);
+      color: #F5EFE3;
+      font-family: 'Montserrat', system-ui, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(23, 19, 14, 0.95);
+      border: 1px solid rgba(199, 154, 59, 0.35);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+    }
+    .form-control {
+      background: #251F18;
+      border: 1px solid rgba(199, 154, 59, 0.3);
+      color: #fff;
+    }
+    .form-control:focus {
+      background: #2F271E;
+      border-color: #FBD965;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(251, 217, 101, 0.3);
+    }
+    .btn-gold {
+      background: linear-gradient(90deg, #A67422, #C79A3B, #FBD965);
+      color: #14110C;
+      font-weight: 700;
+      border: none;
+      padding: 0.8rem;
+    }
+    .btn-gold:hover {
+      background: #FBD965;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="text-center mb-4">
+      <img src="~/images/logo-official-dark.png" alt="Oxygen Consulting & Marketing" style="height: 54px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(251, 217, 101, 0.4));" class="mb-3" />
+      <h1 class="h5 fw-bold text-white mb-1">Staff Management Portal</h1>
+      <small style="color: #FBD965; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.05em;">• Authorized Personnel Only •</small>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+      <div class="alert alert-danger py-2 small mb-4" role="alert">
+        @Html.ValidationSummary(true)
+      </div>
+    }
+
+    <form asp-action="Login" asp-route-returnUrl="@returnUrl" method="post">
+      @Html.AntiForgeryToken()
+
+      <div class="mb-3">
+        <label asp-for="Email" class="form-label small fw-bold text-white">Email Address / البريد الإلكتروني</label>
+        <input asp-for="Email" class="form-control text-white" style="background: #1B1610; border-color: rgba(199, 154, 59, 0.4); font-size: 0.95rem;" type="email" placeholder="admin@oxygen.jo" required autocomplete="username" />
+        <span asp-validation-for="Email" class="text-danger small"></span>
+      </div>
+
+      <div class="mb-3">
+        <label asp-for="Password" class="form-label small fw-bold text-white">Password / كلمة المرور</label>
+        <input asp-for="Password" class="form-control text-white" style="background: #1B1610; border-color: rgba(199, 154, 59, 0.4); font-size: 0.95rem;" type="password" required autocomplete="current-password" />
+        <span asp-validation-for="Password" class="text-danger small"></span>
+      </div>
+
+      <div class="form-check mb-4">
+        <input asp-for="RememberMe" class="form-check-input" type="checkbox" id="rememberCheck" style="cursor: pointer;" />
+        <label class="form-check-label small fw-semibold" style="color: #DDD4C4; cursor: pointer;" for="rememberCheck">Keep me signed in / تذكرني على هذا الجهاز</label>
+      </div>
+
+      <button type="submit" class="btn btn-gold w-100 rounded-3 py-2 fw-bold fs-6">Sign In to Dashboard</button>
+    </form>
+  </div>
+</body>
+</html>

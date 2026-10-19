@@ -1,0 +1,87 @@
+@model Dictionary<string, OxygenMarketing.Models.SiteSetting>
+@{
+    ViewData["Title"] = "Site Settings Configuration";
+}
+
+<div class="mb-4">
+  <h1 class="h3 fw-bold text-white mb-1">Company Coordinates & Site Settings</h1>
+  <p class="text-muted small m-0">Manage contact information, verified social media channels, and company address.</p>
+</div>
+
+<div class="admin-card" style="max-width: 900px;">
+  <form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+
+    <!-- Contact Coordinates -->
+    <h2 class="h5 fw-bold text-gold mb-3">Direct Contact Coordinates</h2>
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <label class="form-label small text-muted">Phone / WhatsApp Number</label>
+        <input type="text" name="valuesAr[Phone]" value="@(Model.ContainsKey("Phone") ? Model["Phone"].ValueAr : "+962796690421")" class="form-control" />
+        <input type="hidden" name="valuesEn[Phone]" value="@(Model.ContainsKey("Phone") ? Model["Phone"].ValueEn : "+962796690421")" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label small text-muted">Primary Contact Email</label>
+        <input type="email" name="valuesAr[Email]" value="@(Model.ContainsKey("Email") ? Model["Email"].ValueAr : "infooxygenmedia2022@gmail.com")" class="form-control" />
+        <input type="hidden" name="valuesEn[Email]" value="@(Model.ContainsKey("Email") ? Model["Email"].ValueEn : "infooxygenmedia2022@gmail.com")" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label small text-muted">Headquarters Address (Arabic)</label>
+        <input type="text" name="valuesAr[Address]" value="@(Model.ContainsKey("Address") ? Model["Address"].ValueAr : "الصويفية، عمّان، الأردن")" class="form-control" dir="rtl" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label small text-muted">Headquarters Address (English)</label>
+        <input type="text" name="valuesEn[Address]" value="@(Model.ContainsKey("Address") ? Model["Address"].ValueEn : "Sweifieh, Amman, Jordan")" class="form-control" />
+      </div>
+    </div>
+
+    <!-- Verified Social Media (Facebook & Instagram ONLY) -->
+    <h2 class="h5 fw-bold text-gold mb-3">Official Social Media Profiles</h2>
+    <div class="alert alert-dark border border-secondary border-opacity-25 small mb-3">
+      <strong>Note:</strong> Strict company policy dictates that Facebook and Instagram are the only official social platforms for Oxygen. Do not introduce other networks.
+    </div>
+
+    <div class="row g-3 mb-4">
+      <div class="col-md-6">
+        <label class="form-label small text-muted">Facebook Page URL</label>
+        <input type="url" name="valuesAr[FacebookUrl]" value="@(Model.ContainsKey("FacebookUrl") ? Model["FacebookUrl"].ValueAr : "https://www.facebook.com/oxygenmedia2022/")" class="form-control" />
+        <input type="hidden" name="valuesEn[FacebookUrl]" value="@(Model.ContainsKey("FacebookUrl") ? Model["FacebookUrl"].ValueEn : "https://www.facebook.com/oxygenmedia2022/")" />
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label small text-muted">Instagram Profile URL</label>
+        <input type="url" name="valuesAr[InstagramUrl]" value="@(Model.ContainsKey("InstagramUrl") ? Model["InstagramUrl"].ValueAr : "https://www.instagram.com/oxygen_consulting__marketing")" class="form-control" />
+        <input type="hidden" name="valuesEn[InstagramUrl]" value="@(Model.ContainsKey("InstagramUrl") ? Model["InstagramUrl"].ValueEn : "https://www.instagram.com/oxygen_consulting__marketing")" />
+      </div>
+    </div>
+
+    <!-- Map Embed -->
+    <h2 class="h5 fw-bold text-gold mb-3">Google Maps Iframe Embed URL</h2>
+    <div class="mb-4">
+      <label class="form-label small text-muted">Google Maps Embed URL (Sweifieh, Amman)</label>
+      <input type="text" name="valuesAr[GoogleMapsEmbed]" value="@(Model.ContainsKey("GoogleMapsEmbed") ? Model["GoogleMapsEmbed"].ValueAr : "")" class="form-control" />
+      <input type="hidden" name="valuesEn[GoogleMapsEmbed]" value="@(Model.ContainsKey("GoogleMapsEmbed") ? Model["GoogleMapsEmbed"].ValueEn : "")" />
+    </div>
+
+    <!-- Official About Statement -->
+    <h2 class="h5 fw-bold text-gold mb-3">Official About Statement</h2>
+    <div class="row g-3 mb-4">
+      <div class="col-12">
+        <label class="form-label small text-muted">About Statement (Arabic)</label>
+        <textarea name="valuesAr[AboutText]" rows="3" class="form-control" dir="rtl">@(Model.ContainsKey("AboutText") ? Model["AboutText"].ValueAr : "")</textarea>
+      </div>
+
+      <div class="col-12">
+        <label class="form-label small text-muted">About Statement (English)</label>
+        <textarea name="valuesEn[AboutText]" rows="3" class="form-control">@(Model.ContainsKey("AboutText") ? Model["AboutText"].ValueEn : "")</textarea>
+      </div>
+    </div>
+
+    <div class="pt-3 border-top border-secondary border-opacity-25">
+      <button type="submit" class="btn btn-gold-admin px-4 py-2">Save All Site Settings</button>
+    </div>
+  </form>
+</div>

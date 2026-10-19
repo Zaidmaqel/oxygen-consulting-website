@@ -1,0 +1,114 @@
+@model OxygenMarketing.Areas.Admin.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard Overview";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h1 class="h3 fw-bold text-white mb-1">Executive Dashboard</h1>
+    <p class="text-muted small m-0">Welcome back. Overview of customer inquiries and live website content.</p>
+  </div>
+  <div class="d-flex gap-2">
+    <a asp-controller="Messages" asp-action="ExportCsv" class="btn btn-sm btn-outline-warning">
+      <span>📥</span> Export Inquiries CSV
+    </a>
+  </div>
+</div>
+
+<!-- KPI Summary Cards -->
+<div class="row g-4 mb-5">
+  <div class="col-md-3">
+    <div class="admin-card text-center">
+      <small class="text-muted d-block mb-1">Unread Messages</small>
+      <div class="display-5 fw-bold @(Model.UnreadMessages > 0 ? "text-danger" : "text-white")">
+        @Model.UnreadMessages
+      </div>
+      <a asp-controller="Messages" asp-action="Index" asp-route-filter="unread" class="small text-gold-admin text-decoration-none mt-2 d-inline-block">View unread →</a>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="admin-card text-center">
+      <small class="text-muted d-block mb-1">Total Inquiries</small>
+      <div class="display-5 fw-bold text-white">@Model.TotalMessages</div>
+      <a asp-controller="Messages" asp-action="Index" class="small text-muted text-decoration-none mt-2 d-inline-block">All messages →</a>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="admin-card text-center">
+      <small class="text-muted d-block mb-1">Active Services</small>
+      <div class="display-5 fw-bold text-white">@Model.TotalServices</div>
+      <a asp-controller="Services" asp-action="Index" class="small text-muted text-decoration-none mt-2 d-inline-block">Manage services →</a>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+    <div class="admin-card text-center">
+      <small class="text-muted d-block mb-1">Case Studies</small>
+      <div class="display-5 fw-bold text-white">@Model.TotalCaseStudies</div>
+      <a asp-controller="CaseStudies" asp-action="Index" class="small text-muted text-decoration-none mt-2 d-inline-block">Manage cases →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Messages Table -->
+<div class="admin-card">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h5 fw-bold text-white m-0">Recent Inquiries</h2>
+    <a asp-controller="Messages" asp-action="Index" class="btn btn-sm btn-outline-secondary">View All</a>
+  </div>
+
+  @if (Model.RecentMessages.Count == 0)
+  {
+    <p class="text-muted my-4 text-center">No inquiries received yet.</p>
+  }
+  else
+  {
+    <div class="table-responsive">
+      <table class="table table-dark table-hover align-middle mb-0">
+        <thead>
+          <tr class="text-muted small">
+            <th>Status</th>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Company</th>
+            <th>Service</th>
+            <th class="text-end">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach (var m in Model.RecentMessages)
+          {
+            <tr>
+              <td>
+                @if (!m.IsRead)
+                {
+                  <span class="badge bg-danger">New</span>
+                }
+                else
+                {
+                  <span class="badge bg-secondary">Read</span>
+                }
+              </td>
+              <td class="small text-muted">@m.CreatedAt.ToString("MMM dd, yyyy HH:mm")</td>
+              <td class="fw-bold">@m.Name</td>
+              <td class="small">
+                <div><a href="tel:@m.Phone" class="text-muted text-decoration-none">@m.Phone</a></div>
+                <div><a href="mailto:@m.Email" class="text-gold-admin text-decoration-none">@m.Email</a></div>
+              </td>
+              <td class="text-muted small">@(m.Company ?? "—")</td>
+              <td class="small">@(m.Service != null ? m.Service.TitleEn : "General")</td>
+              <td class="text-end">
+                <a asp-controller="Messages" asp-action="Details" asp-route-id="@m.Id" class="btn btn-sm btn-outline-warning">
+                  Open
+                </a>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
