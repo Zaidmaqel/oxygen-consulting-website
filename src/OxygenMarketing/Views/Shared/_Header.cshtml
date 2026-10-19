@@ -1,0 +1,125 @@
+@{
+    var currentCulture = System.Globalization.CultureInfo.CurrentUICulture.Name;
+    var isAr = currentCulture.StartsWith("ar");
+    var targetCulture = isAr ? "en" : "ar";
+    var returnUrl = Context.Request.Path + Context.Request.QueryString;
+
+    string T(string key, string fallbackAr, string fallbackEn)
+    {
+        try {
+            var val = Loc[key]?.Value;
+            if (string.IsNullOrEmpty(val) || val == key)
+            {
+                return isAr ? fallbackAr : fallbackEn;
+            }
+            return val;
+        } catch {
+            return isAr ? fallbackAr : fallbackEn;
+        }
+    }
+}
+
+<header class="site-header" role="banner">
+  <div class="container site-nav-container">
+    <!-- Brand Logo: Official Oxygen Consulting & Marketing Logo -->
+    <a asp-controller="Home" asp-action="Index" class="brand-logo-wrap d-flex align-items-center" aria-label="Oxygen Consulting & Marketing">
+      <img src="~/images/logo-official-dark.png" alt="Oxygen Consulting & Marketing" class="brand-logo-img" style="height: 48px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 10px rgba(199, 154, 59, 0.25));" />
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="d-none d-lg-flex align-items-center gap-3 gap-xl-4" role="navigation" aria-label="Main Navigation">
+      <ul class="nav-links m-0 p-0 d-flex align-items-center gap-1 gap-xl-2 list-unstyled">
+        <li><a asp-controller="Home" asp-action="Index" class="nav-link-item">@T("NavHome", "الرئيسية", "Home")</a></li>
+        <li><a asp-controller="Home" asp-action="About" class="nav-link-item">@T("NavAbout", "من نحن", "About")</a></li>
+        <li><a asp-controller="Home" asp-action="Services" class="nav-link-item">@T("NavServices", "خدماتنا", "Services")</a></li>
+        <li><a asp-controller="Home" asp-action="Portfolio" class="nav-link-item">@T("NavPortfolio", "أعمالنا", "Portfolio")</a></li>
+        <li><a href="/#campaign-studio" class="nav-link-item studio-link"><span class="pulse-dot"></span>@T("NavStudio", "استوديو الحملات", "Studio")</a></li>
+        <li><a asp-controller="Home" asp-action="Contact" class="nav-link-item">@T("NavContact", "تواصل معنا", "Contact")</a></li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3">
+        <!-- Interactive Audio FX Toggle -->
+        <button type="button" class="audio-toggle-btn" id="soundToggleBtn" aria-label="Toggle Interactive Audio" title="@(isAr ? "تفعيل المؤثرات الصوتية التفاعلية" : "Toggle Interactive Sound")">
+          <span class="audio-wave-anim">
+            <span></span><span></span><span></span>
+          </span>
+          <span class="audio-btn-label">@(isAr ? "صوت تفاعلي" : "Audio FX")</span>
+        </button>
+
+        <!-- Language Switcher Pill -->
+        <form asp-controller="Home" asp-action="SetLanguage" method="post" class="d-inline m-0 p-0">
+          @Html.AntiForgeryToken()
+          <input type="hidden" name="culture" value="@targetCulture" />
+          <input type="hidden" name="returnUrl" value="@returnUrl" />
+          <button type="submit" class="lang-switcher-btn" aria-label="Switch Language">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+            <span>@(targetCulture == "en" ? "English" : "العربية")</span>
+          </button>
+        </form>
+
+        <!-- CTA Button -->
+        <a asp-controller="Home" asp-action="Contact" class="btn-gold d-none d-xl-inline-flex">
+          <span>@T("GetInTouch", "احجز استشارتك", "Book Consultation")</span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Mobile Header Actions -->
+    <div class="d-flex d-lg-none align-items-center gap-2">
+      <!-- Mobile Sound Toggle Trigger -->
+      <button type="button" class="audio-toggle-btn py-1 px-2 sound-toggle-trigger" style="font-size: 0.78rem;" aria-label="Toggle Sound">
+        <span class="audio-wave-anim"><span></span><span></span></span>
+      </button>
+
+      <!-- Language Switcher on Mobile Header -->
+      <form asp-controller="Home" asp-action="SetLanguage" method="post" class="d-inline m-0">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="culture" value="@targetCulture" />
+        <input type="hidden" name="returnUrl" value="@returnUrl" />
+        <button type="submit" class="lang-switcher-btn py-1 px-2" style="font-size: 0.8rem;" aria-label="Switch Language">
+          <span>@(targetCulture == "en" ? "EN" : "عربي")</span>
+        </button>
+      </form>
+
+      <button class="btn btn-glass p-2 d-flex align-items-center justify-content-center" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNavOffcanvas" aria-controls="mobileNavOffcanvas" aria-label="Toggle Navigation" style="width: 42px; height: 42px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold-light)" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Offcanvas Menu -->
+<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="mobileNavOffcanvas" aria-labelledby="mobileNavLabel" style="background: rgba(18, 14, 10, 0.96) !important; backdrop-filter: blur(20px); border-inline-start: 1px solid rgba(199, 154, 59, 0.3);">
+  <div class="offcanvas-header border-bottom border-secondary border-opacity-25 p-3">
+    <img src="~/images/logo-official-dark.png" alt="Oxygen Consulting & Marketing" style="height: 38px; width: auto;" />
+    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column justify-content-between p-4">
+    <ul class="nav flex-column gap-3 list-unstyled">
+      <li class="nav-item"><a asp-controller="Home" asp-action="Index" class="nav-link text-white fs-5 py-2">@T("NavHome", "الرئيسية", "Home")</a></li>
+      <li class="nav-item"><a asp-controller="Home" asp-action="About" class="nav-link text-white fs-5 py-2">@T("NavAbout", "من نحن", "About")</a></li>
+      <li class="nav-item"><a asp-controller="Home" asp-action="Services" class="nav-link text-white fs-5 py-2">@T("NavServices", "خدماتنا", "Services")</a></li>
+      <li class="nav-item"><a asp-controller="Home" asp-action="Portfolio" class="nav-link text-white fs-5 py-2">@T("NavPortfolio", "أعمالنا", "Portfolio")</a></li>
+      <li class="nav-item"><a href="/#campaign-studio" class="nav-link text-gold-light fs-5 py-2">@T("NavStudio", "استوديو الحملات", "Studio")</a></li>
+      <li class="nav-item"><a asp-controller="Home" asp-action="Contact" class="nav-link text-white fs-5 py-2">@T("NavContact", "تواصل معنا", "Contact")</a></li>
+    </ul>
+
+    <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
+      <a asp-controller="Home" asp-action="Contact" class="btn-gold w-100 py-3 mb-3 text-center">
+        @T("GetInTouch", "احجز استشارتك", "Book Consultation")
+      </a>
+      <p class="text-white-50 small text-center m-0">
+        Sweifieh, Amman, Jordan • الصويفية، عمّان<br />
+        <span dir="ltr">+962 7 9669 0421</span>
+      </p>
+    </div>
+  </div>
+</div>

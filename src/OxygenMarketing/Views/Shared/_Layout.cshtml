@@ -1,0 +1,134 @@
+@using System.Globalization
+@{
+    var currentCulture = CultureInfo.CurrentUICulture.Name;
+    var isRtl = currentCulture.StartsWith("ar");
+    var title = ViewData["Title"] as string ?? (isRtl ? "مؤسسة أكسجين للاستشارات والتسويق | دع علامتك تتنفس" : "Oxygen Consulting & Marketing | Let Your Brand Breathe");
+    var description = ViewData["MetaDescription"] as string ?? (isRtl 
+        ? "مؤسسة أكسجين للاستشارات والتسويق في عمّان، الأردن. استراتيجيات تسويقية مدروسة، صناعة محتوى إبداعي، وإدارة حملات إعلانية مبنية على البيانات." 
+        : "Oxygen Consulting & Marketing based in Amman, Jordan. Data-driven social media strategy, creative content production, and performance ad management.");
+    var currentUrl = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}";
+}
+<!DOCTYPE html>
+<html lang="@currentCulture" dir="@(isRtl ? "rtl" : "ltr")">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@title</title>
+  <meta name="description" content="@description" />
+  <meta name="author" content="Oxygen Consulting & Marketing" />
+  <link rel="canonical" href="@currentUrl" />
+
+  <!-- Hreflang SEO links -->
+  <link rel="alternate" hreflang="ar" href="@currentUrl" />
+  <link rel="alternate" hreflang="en" href="@currentUrl" />
+  <link rel="alternate" hreflang="x-default" href="@currentUrl" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="~/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="~/images/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="~/images/favicon-180x180.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="~/images/favicon-512x512.png" />
+
+  <!-- Open Graph / Social Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="@title" />
+  <meta property="og:description" content="@description" />
+  <meta property="og:image" content="@($"{Context.Request.Scheme}://{Context.Request.Host}/images/og-image.jpg")" />
+  <meta property="og:url" content="@currentUrl" />
+  <meta property="og:site_name" content="Oxygen Consulting & Marketing" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="@title" />
+  <meta name="twitter:description" content="@description" />
+  <meta name="twitter:image" content="@($"{Context.Request.Scheme}://{Context.Request.Host}/images/og-image.jpg")" />
+
+  <!-- JSON-LD Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@@context": "https://schema.org",
+    "@@type": "Organization",
+    "name": "Oxygen Consulting & Marketing",
+    "alternateName": "مؤسسة أكسجين للاستشارات والتسويق",
+    "url": "@($"{Context.Request.Scheme}://{Context.Request.Host}")",
+    "logo": "@($"{Context.Request.Scheme}://{Context.Request.Host}/images/logo.png")",
+    "description": "@description",
+    "address": {
+      "@@type": "PostalAddress",
+      "streetAddress": "Sweifieh",
+      "addressLocality": "Amman",
+      "addressCountry": "JO"
+    },
+    "telephone": "+962796690421",
+    "email": "infooxygenmedia2022@gmail.com",
+    "sameAs": [
+      "https://www.facebook.com/oxygenmedia2022/",
+      "https://www.instagram.com/oxygen_consulting__marketing"
+    ]
+  }
+  </script>
+
+  <!-- Self-Hosted Stylesheets & CSS -->
+  @if (isRtl)
+  {
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.rtl.min.css" asp-append-version="true" />
+  }
+  else
+  {
+    <link rel="stylesheet" href="~/lib/bootstrap/bootstrap.min.css" asp-append-version="true" />
+  }
+  <!-- Modern High-End Typography (Cairo & Readex Pro for Arabic, Montserrat for English) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Readex+Pro:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="~/lib/lenis/lenis.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/fonts/fonts.css" asp-append-version="true" />
+  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+  @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+  <!-- Dynamic Ambient Cursor Spotlight (Nova AI Inspired) -->
+  <div id="ambient-cursor-glow" aria-hidden="true"></div>
+
+  <!-- Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">@(isRtl ? "تخطي إلى المحتوى الرئيسي" : "Skip to main content")</a>
+
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress"></div>
+
+  <!-- Signature Iris Preloader -->
+  <partial name="_Preloader" />
+
+  <!-- Global Header -->
+  <partial name="_Header" />
+
+  <!-- Main Content -->
+  <main id="main-content" role="main">
+    @RenderBody()
+  </main>
+
+  <!-- Floating WhatsApp Action -->
+  <partial name="_WhatsAppButton" />
+
+  <!-- Global Footer -->
+  <partial name="_Footer" />
+
+  <!-- Self-Hosted Scripts (Strictly local, no CDN runtime requests) -->
+  <script src="~/lib/bootstrap/bootstrap.bundle.min.js" asp-append-version="true"></script>
+  <script src="~/lib/gsap/gsap.min.js" asp-append-version="true"></script>
+  <script src="~/lib/gsap/ScrollTrigger.min.js" asp-append-version="true"></script>
+  <script src="~/lib/lenis/lenis.min.js" asp-append-version="true"></script>
+
+  <!-- Modular Vanilla JS Modules -->
+  <script src="~/js/preloader.js" asp-append-version="true"></script>
+  <script src="~/js/cursor.js" asp-append-version="true"></script>
+  <script src="~/js/transitions.js" asp-append-version="true"></script>
+  <script src="~/js/effects.js" asp-append-version="true"></script>
+  <script src="~/js/marquee.js" asp-append-version="true"></script>
+  <script src="~/js/contact.js" asp-append-version="true"></script>
+  <script src="~/js/site.js" asp-append-version="true"></script>
+
+  @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

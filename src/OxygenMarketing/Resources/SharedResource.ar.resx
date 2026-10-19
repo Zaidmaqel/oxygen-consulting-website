@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="0" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <data name="BrandName" xml:space="preserve">
+    <value>مؤسسة أكسجين للاستشارات والتسويق</value>
+  </data>
+  <data name="Tagline" xml:space="preserve">
+    <value>دع علامتك تتنفس</value>
+  </data>
+  <data name="NavHome" xml:space="preserve">
+    <value>الرئيسية</value>
+  </data>
+  <data name="NavAbout" xml:space="preserve">
+    <value>من نحن</value>
+  </data>
+  <data name="NavServices" xml:space="preserve">
+    <value>خدماتنا</value>
+  </data>
+  <data name="NavPortfolio" xml:space="preserve">
+    <value>أعمالنا</value>
+  </data>
+  <data name="NavStudio" xml:space="preserve">
+    <value>استوديو الحملات</value>
+  </data>
+  <data name="NavContact" xml:space="preserve">
+    <value>اتصل بنا</value>
+  </data>
+  <data name="GetInTouch" xml:space="preserve">
+    <value>تواصل معنا</value>
+  </data>
+  <data name="ExploreWork" xml:space="preserve">
+    <value>استكشف أعمالنا</value>
+  </data>
+  <data name="BuildCampaign" xml:space="preserve">
+    <value>صمم حملتك الآن</value>
+  </data>
+  <data name="YearsExperience" xml:space="preserve">
+    <value>سنوات الخبرة</value>
+  </data>
+  <data name="CampaignsRun" xml:space="preserve">
+    <value>حملة إعلانية ناجحة</value>
+  </data>
+  <data name="ManagedBudget" xml:space="preserve">
+    <value>إنفاق إعلاني مُدار</value>
+  </data>
+  <data name="SectorsServed" xml:space="preserve">
+    <value>قطاعات متنوعة</value>
+  </data>
+  <data name="HeroTitlePart1" xml:space="preserve">
+    <value>دع علامتك التجارية</value>
+  </data>
+  <data name="HeroTitleHighlight" xml:space="preserve">
+    <value>تتنفس</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>نحوّل الميزانية الإعلانية إلى قرارات مبنية على البيانات. استراتيجيات تسويقية مدروسة، محتوى إبداعي، وإدارة حملات تحقق أهدافك وتزيد تفاعل جمهورك.</value>
+  </data>
+  <data name="AboutSectionTitle" xml:space="preserve">
+    <value>من نحن</value>
+  </data>
+  <data name="AboutStatement" xml:space="preserve">
+    <value>نحن أكسجين للاستشارات والتسويق، نساعد العلامات التجارية على بناء حضور قوي عبر جميع منصات التواصل الاجتماعي، من خلال استراتيجيات تسويقية مدروسة، وصناعة محتوى إبداعي، وإدارة الحسابات والحملات الإعلانية، وتحليل الأداء لتحقيق أهدافها وزيادة تفاعلها مع جمهورها.</value>
+  </data>
+  <data name="HighlightsLocalGlobal" xml:space="preserve">
+    <value>أسواق محلية ودولية</value>
+  </data>
+  <data name="HighlightsAllPlatforms" xml:space="preserve">
+    <value>جميع منصات التواصل الاجتماعي</value>
+  </data>
+  <data name="HighlightsMethod" xml:space="preserve">
+    <value>منهجنا في تحقيق النتائج</value>
+  </data>
+  <data name="ServicesSectionTitle" xml:space="preserve">
+    <value>ماذا ندير؟</value>
+  </data>
+  <data name="ServicesSectionSubtitle" xml:space="preserve">
+    <value>منظومة خدمات تسويقية متكاملة مصممة لدفع نمو علامتك</value>
+  </data>
+  <data name="StudioTitle" xml:space="preserve">
+    <value>استوديو بناء الحملات</value>
+  </data>
+  <data name="StudioSubtitle" xml:space="preserve">
+    <value>حدد المنصات، الخدمات، والهدف لتشاهد مدار حملتك يتشكل فوراً مع تقديرات الأداء والميزانية</value>
+  </data>
+  <data name="StudioPlatforms" xml:space="preserve">
+    <value>١. اختر المنصات المستهدفة</value>
+  </data>
+  <data name="StudioServices" xml:space="preserve">
+    <value>٢. اختر الخدمات المطلوبة</value>
+  </data>
+  <data name="StudioGoal" xml:space="preserve">
+    <value>٣. حدد الهدف الرئيسي</value>
+  </data>
+  <data name="GoalAwareness" xml:space="preserve">
+    <value>الوعي والانتشار (Awareness)</value>
+  </data>
+  <data name="GoalMessages" xml:space="preserve">
+    <value>محادثات واستفسارات (Messages)</value>
+  </data>
+  <data name="GoalSales" xml:space="preserve">
+    <value>مبيعات وتحويلات (Sales)</value>
+  </data>
+  <data name="EstBudget" xml:space="preserve">
+    <value>الميزانية الشهرية المقدرة</value>
+  </data>
+  <data name="EstReach" xml:space="preserve">
+    <value>الوصول المتوقع (Reach)</value>
+  </data>
+  <data name="EstConversations" xml:space="preserve">
+    <value>المحادثات المتوقعة</value>
+  </data>
+  <data name="RequestPackageBtn" xml:space="preserve">
+    <value>اطلب هذه الباقة الآن</value>
+  </data>
+  <data name="StudioDisclaimer" xml:space="preserve">
+    <value>تقديرات استرشادية مبنية على حملات سابقة ولا تشكل ضماناً تعاقدياً.</value>
+  </data>
+  <data name="StoryTitle" xml:space="preserve">
+    <value>شو بصير عند أكسجين؟</value>
+  </data>
+  <data name="StorySubtitle" xml:space="preserve">
+    <value>رحلة حملتك من الفكرة والتخطيط حتى تحقيق النتائج وتحليل البيانات</value>
+  </data>
+  <data name="Step1Title" xml:space="preserve">
+    <value>الاستراتيجية ودراسة السوق</value>
+  </data>
+  <data name="Step1Desc" xml:space="preserve">
+    <value>ندرس السوق والمنافسين، نحدد شرائح الجمهور المستهدف، ونضع خطة واضحة تحدد مسار الحملات ومؤشرات الأداء.</value>
+  </data>
+  <data name="Step2Title" xml:space="preserve">
+    <value>صناعة المحتوى الإبداعي</value>
+  </data>
+  <data name="Step2Desc" xml:space="preserve">
+    <value>نبتكر محتوى بصري ونصوص إعلانية تلامس اهتمام الجمهور وتخلق انطباعاً أصيلاً ومميزاً لعلامتك.</value>
+  </data>
+  <data name="Step3Title" xml:space="preserve">
+    <value>إطلاق وإدارة الحملات</value>
+  </data>
+  <data name="Step3Desc" xml:space="preserve">
+    <value>ندير الحملات الممولة باحترافية، نختبر التصاميم والجماهير (A/B Testing)، ونراقب كفاءة كل دولار يتم إنفاقه.</value>
+  </data>
+  <data name="Step4Title" xml:space="preserve">
+    <value>تحليل الأداء والتطوير</value>
+  </data>
+  <data name="Step4Desc" xml:space="preserve">
+    <value>نحلل النتائج وفق مؤشرات الأداء المعتمدة (KPIs) ونعيد توزيع الميزانية بشكل دوري لضمان تحسين مستمر.</value>
+  </data>
+  <data name="RadarTitle" xml:space="preserve">
+    <value>رادار أداء العلامة</value>
+  </data>
+  <data name="RadarSubtitle" xml:space="preserve">
+    <value>مؤشرات حية تقيس التفاعل، تكلفة النقرة، والوصول الفعلي من واقع حملاتنا</value>
+  </data>
+  <data name="CaseStudiesTitle" xml:space="preserve">
+    <value>دراسات الحالة وأعمالنا</value>
+  </data>
+  <data name="CaseStudiesSubtitle" xml:space="preserve">
+    <value>أرقام حقيقية ونتائج موثقة من واقع الحملات السابقة</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>جميع القطاعات</value>
+  </data>
+  <data name="ViewCaseDetails" xml:space="preserve">
+    <value>عرض تفاصيل الحملة</value>
+  </data>
+  <data name="FinalCtaTitle" xml:space="preserve">
+    <value>جاهز لتجعل علامتك التجارية تتنفس؟</value>
+  </data>
+  <data name="FinalCtaSubtitle" xml:space="preserve">
+    <value>تواصل معنا اليوم لبدء التخطيط لحملتك القادمة وصناعة حضور رقمي مميز ومؤثر.</value>
+  </data>
+  <data name="ContactTitle" xml:space="preserve">
+    <value>تواصل معنا</value>
+  </data>
+  <data name="ContactSubtitle" xml:space="preserve">
+    <value>يسعدنا دائماً استقبال استفساراتكم والتعاون معكم لتطوير حضوركم الرقمي</value>
+  </data>
+  <data name="FormName" xml:space="preserve">
+    <value>الاسم الكريم</value>
+  </data>
+  <data name="FormPhone" xml:space="preserve">
+    <value>رقم الهاتف / واتساب</value>
+  </data>
+  <data name="FormEmail" xml:space="preserve">
+    <value>البريد الإلكتروني</value>
+  </data>
+  <data name="FormCompany" xml:space="preserve">
+    <value>اسم الشركة / العلامة (اختياري)</value>
+  </data>
+  <data name="FormService" xml:space="preserve">
+    <value>الخدمة المهتم بها</value>
+  </data>
+  <data name="FormSelectService" xml:space="preserve">
+    <value>-- اختر الخدمة --</value>
+  </data>
+  <data name="FormMessage" xml:space="preserve">
+    <value>تفاصيل رسالتك أو استفسارك</value>
+  </data>
+  <data name="FormSubmit" xml:space="preserve">
+    <value>إرسال الرسالة</value>
+  </data>
+  <data name="QuickLinks" xml:space="preserve">
+    <value>روابط سريعة</value>
+  </data>
+  <data name="ContactInfo" xml:space="preserve">
+    <value>معلومات الاتصال</value>
+  </data>
+  <data name="LocationSweifieh" xml:space="preserve">
+    <value>الصويفية، عمّان، الأردن</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>جميع الحقوق محفوظة</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>سياسة الخصوصية</value>
+  </data>
+  <data name="TermsOfService" xml:space="preserve">
+    <value>الشروط والأحكام</value>
+  </data>
+  <data name="LanguageSwitcher" xml:space="preserve">
+    <value>English</value>
+  </data>
+</root>

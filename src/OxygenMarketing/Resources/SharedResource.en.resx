@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="0" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <data name="BrandName" xml:space="preserve">
+    <value>Oxygen Consulting &amp; Marketing</value>
+  </data>
+  <data name="Tagline" xml:space="preserve">
+    <value>Let Your Brand Breathe</value>
+  </data>
+  <data name="NavHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="NavAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="NavServices" xml:space="preserve">
+    <value>Services</value>
+  </data>
+  <data name="NavPortfolio" xml:space="preserve">
+    <value>Portfolio</value>
+  </data>
+  <data name="NavStudio" xml:space="preserve">
+    <value>Campaign Studio</value>
+  </data>
+  <data name="NavContact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="GetInTouch" xml:space="preserve">
+    <value>Get In Touch</value>
+  </data>
+  <data name="ExploreWork" xml:space="preserve">
+    <value>Explore Work</value>
+  </data>
+  <data name="BuildCampaign" xml:space="preserve">
+    <value>Design Your Campaign</value>
+  </data>
+  <data name="YearsExperience" xml:space="preserve">
+    <value>Years Experience</value>
+  </data>
+  <data name="CampaignsRun" xml:space="preserve">
+    <value>Successful Campaigns</value>
+  </data>
+  <data name="ManagedBudget" xml:space="preserve">
+    <value>Managed Ad Spend</value>
+  </data>
+  <data name="SectorsServed" xml:space="preserve">
+    <value>Diverse Sectors</value>
+  </data>
+  <data name="HeroTitlePart1" xml:space="preserve">
+    <value>Let Your Brand</value>
+  </data>
+  <data name="HeroTitleHighlight" xml:space="preserve">
+    <value>Breathe</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Transforming advertising budgets into data-driven decisions. Strategic consulting, creative storytelling, and managed campaigns that amplify brand authority and measurable growth.</value>
+  </data>
+  <data name="AboutSectionTitle" xml:space="preserve">
+    <value>About Oxygen</value>
+  </data>
+  <data name="AboutStatement" xml:space="preserve">
+    <value>We are Oxygen Consulting &amp; Marketing. We help brands build a commanding presence across all social media platforms through data-driven marketing strategies, creative content production, end-to-end account and campaign management, and in-depth performance analytics that amplify engagement and achieve business goals.</value>
+  </data>
+  <data name="HighlightsLocalGlobal" xml:space="preserve">
+    <value>Local &amp; International Markets</value>
+  </data>
+  <data name="HighlightsAllPlatforms" xml:space="preserve">
+    <value>All Social Media Platforms</value>
+  </data>
+  <data name="HighlightsMethod" xml:space="preserve">
+    <value>Our Results-Driven Approach</value>
+  </data>
+  <data name="ServicesSectionTitle" xml:space="preserve">
+    <value>What We Manage</value>
+  </data>
+  <data name="ServicesSectionSubtitle" xml:space="preserve">
+    <value>A complete social marketing ecosystem built to accelerate commercial growth</value>
+  </data>
+  <data name="StudioTitle" xml:space="preserve">
+    <value>Build-Your-Campaign Studio</value>
+  </data>
+  <data name="StudioSubtitle" xml:space="preserve">
+    <value>Configure platforms, core services, and goals to preview your live orbital campaign with budget and reach estimates</value>
+  </data>
+  <data name="StudioPlatforms" xml:space="preserve">
+    <value>1. Select Target Platforms</value>
+  </data>
+  <data name="StudioServices" xml:space="preserve">
+    <value>2. Select Required Services</value>
+  </data>
+  <data name="StudioGoal" xml:space="preserve">
+    <value>3. Select Campaign Objective</value>
+  </data>
+  <data name="GoalAwareness" xml:space="preserve">
+    <value>Brand Awareness &amp; Reach</value>
+  </data>
+  <data name="GoalMessages" xml:space="preserve">
+    <value>Messaging Inquiries &amp; WhatsApp</value>
+  </data>
+  <data name="GoalSales" xml:space="preserve">
+    <value>Sales &amp; Conversions</value>
+  </data>
+  <data name="EstBudget" xml:space="preserve">
+    <value>Estimated Monthly Budget</value>
+  </data>
+  <data name="EstReach" xml:space="preserve">
+    <value>Projected Reach</value>
+  </data>
+  <data name="EstConversations" xml:space="preserve">
+    <value>Projected Conversations</value>
+  </data>
+  <data name="RequestPackageBtn" xml:space="preserve">
+    <value>Request This Package</value>
+  </data>
+  <data name="StudioDisclaimer" xml:space="preserve">
+    <value>Estimates based on past campaigns, not a guarantee.</value>
+  </data>
+  <data name="StoryTitle" xml:space="preserve">
+    <value>What Happens at Oxygen?</value>
+  </data>
+  <data name="StorySubtitle" xml:space="preserve">
+    <value>Your campaign roadmap from research and ideation to deployment and data-backed scale</value>
+  </data>
+  <data name="Step1Title" xml:space="preserve">
+    <value>Research &amp; Strategy</value>
+  </data>
+  <data name="Step1Desc" xml:space="preserve">
+    <value>We analyze market dynamics, competitor positioning, and high-intent audiences to construct a transparent performance roadmap.</value>
+  </data>
+  <data name="Step2Title" xml:space="preserve">
+    <value>Creative Content Creation</value>
+  </data>
+  <data name="Step2Desc" xml:space="preserve">
+    <value>We produce arresting visuals, motion concepts, and tailored copy that align with brand voice and trigger audience interaction.</value>
+  </data>
+  <data name="Step3Title" xml:space="preserve">
+    <value>Campaign Launch &amp; Ads</value>
+  </data>
+  <data name="Step3Desc" xml:space="preserve">
+    <value>We execute paid ads with rigorous audience segmentation and creative A/B testing to ensure maximum efficiency per dollar spent.</value>
+  </data>
+  <data name="Step4Title" xml:space="preserve">
+    <value>Performance Analysis &amp; Scale</value>
+  </data>
+  <data name="Step4Desc" xml:space="preserve">
+    <value>Every metric is audited against accredited KPIs. Winning variations are scaled dynamically while budgets are continuously refined.</value>
+  </data>
+  <data name="RadarTitle" xml:space="preserve">
+    <value>Brand Pulse Radar</value>
+  </data>
+  <data name="RadarSubtitle" xml:space="preserve">
+    <value>Live interactive telemetry mapping reach, conversations, and CPC benchmarks from real campaigns</value>
+  </data>
+  <data name="CaseStudiesTitle" xml:space="preserve">
+    <value>Case Studies &amp; Performance</value>
+  </data>
+  <data name="CaseStudiesSubtitle" xml:space="preserve">
+    <value>Verified empirical metrics from real client campaigns</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>All Sectors</value>
+  </data>
+  <data name="ViewCaseDetails" xml:space="preserve">
+    <value>View Case Details</value>
+  </data>
+  <data name="FinalCtaTitle" xml:space="preserve">
+    <value>Ready to Let Your Brand Breathe?</value>
+  </data>
+  <data name="FinalCtaSubtitle" xml:space="preserve">
+    <value>Reach out today to discuss your next campaign and unlock sustainable digital presence.</value>
+  </data>
+  <data name="ContactTitle" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="ContactSubtitle" xml:space="preserve">
+    <value>We are here to help scale your marketing. Send us a message or request a custom proposal.</value>
+  </data>
+  <data name="FormName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="FormPhone" xml:space="preserve">
+    <value>Phone / WhatsApp</value>
+  </data>
+  <data name="FormEmail" xml:space="preserve">
+    <value>Email Address</value>
+  </data>
+  <data name="FormCompany" xml:space="preserve">
+    <value>Company / Brand (Optional)</value>
+  </data>
+  <data name="FormService" xml:space="preserve">
+    <value>Service of Interest</value>
+  </data>
+  <data name="FormSelectService" xml:space="preserve">
+    <value>-- Select a Service --</value>
+  </data>
+  <data name="FormMessage" xml:space="preserve">
+    <value>Your Message or Campaign Details</value>
+  </data>
+  <data name="FormSubmit" xml:space="preserve">
+    <value>Send Message</value>
+  </data>
+  <data name="QuickLinks" xml:space="preserve">
+    <value>Quick Links</value>
+  </data>
+  <data name="ContactInfo" xml:space="preserve">
+    <value>Contact Details</value>
+  </data>
+  <data name="LocationSweifieh" xml:space="preserve">
+    <value>Sweifieh, Amman, Jordan</value>
+  </data>
+  <data name="AllRightsReserved" xml:space="preserve">
+    <value>All rights reserved</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="TermsOfService" xml:space="preserve">
+    <value>Terms of Service</value>
+  </data>
+  <data name="LanguageSwitcher" xml:space="preserve">
+    <value>العربية</value>
+  </data>
+</root>

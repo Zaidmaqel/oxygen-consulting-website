@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 180" width="680" height="180">
+  <defs>
+    <linearGradient id="oxygenGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A67422" />
+      <stop offset="22%" stop-color="#C79A3B" />
+      <stop offset="50%" stop-color="#FBD965" />
+      <stop offset="78%" stop-color="#C79A3B" />
+      <stop offset="100%" stop-color="#A67422" />
+    </linearGradient>
+    <linearGradient id="pureGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FBD965" />
+      <stop offset="100%" stop-color="#A67422" />
+    </linearGradient>
+  </defs>
+  <g id="logo-mark">
+    <!-- OXYGEN Wordmark -->
+    <text x="30" y="102" font-family="'Montserrat', 'Arial Black', 'Helvetica Neue', sans-serif" font-weight="900" font-size="94" fill="url(#oxygenGold)" letter-spacing="2">OXYGEN</text>
+    
+    <!-- Small vertical gold rectangle with 'pure' in white -->
+    <rect x="520" y="32" width="22" height="70" rx="3" fill="url(#pureGold)" />
+    <text x="531" y="67" font-family="'Montserrat', sans-serif" font-weight="600" font-size="16" fill="#FFFFFF" text-anchor="middle" transform="rotate(-90 531 67)" letter-spacing="2">pure</text>
+    
+    <!-- Tagline: Consulting & Marketing -->
+    <text x="33" y="146" font-family="'Montserrat', 'Segoe UI', sans-serif" font-weight="500" font-size="23.5" fill="#231F20" letter-spacing="10">Consulting &amp; Marketing</text>
+  </g>
+</svg>
