@@ -1,0 +1,169 @@
+@using System.Globalization
+@{
+    var isAr = CultureInfo.CurrentUICulture.Name.StartsWith("ar");
+    ViewData["Title"] = isAr ? "من نحن | مؤسسة أكسجين للاستشارات والتسويق" : "About Us | Oxygen Consulting & Marketing";
+    ViewData["MetaDescription"] = isAr
+        ? "تعرف على مؤسسة أكسجين للاستشارات والتسويق في عمّان، الأردن. خبرة +7 سنوات في إدارة الحملات وبناء استراتيجيات تسويقية مبنية على البيانات."
+        : "Learn about Oxygen Consulting & Marketing based in Amman, Jordan. 7+ years of experience in data-driven marketing strategy and campaigns.";
+}
+
+<!-- Page Header Hero -->
+<section class="py-5 text-center position-relative" style="padding-top: 130px !important; background: radial-gradient(circle at 50% 30%, #261D12 0%, var(--dark) 75%);">
+  <div class="container py-4">
+    <div class="section-badge">@Loc["NavAbout"]</div>
+    <h1 class="display-4 fw-bold text-white mb-3">
+      @(isAr ? "نحن أكسجين للاستشارات والتسويق" : "About Oxygen Consulting & Marketing")
+    </h1>
+    <p class="fs-5 text-cream-soft mx-auto" style="max-width: 750px;">
+      @(isAr ? "نساعد العلامات التجارية على بناء حضور قوي ومؤثر عبر جميع منصات التواصل الاجتماعي." : "Empowering brands to build a commanding and enduring presence across all social channels.")
+    </p>
+  </div>
+</section>
+
+<!-- Core Profile Statement (Cream Section for High Contrast) -->
+<section class="section-cream py-5" aria-label="Company Profile Statement">
+  <div class="container py-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <h2 class="h3 fw-bold mb-4 text-dark">
+          @(isAr ? "رسالتنا ورؤيتنا في السوق" : "Our Vision & Mission")
+        </h2>
+        <p class="fs-5 mb-4 text-muted-custom" style="line-height: 1.9;">
+          @(isAr 
+            ? "نحن أكسجين للاستشارات والتسويق، نساعد العلامات التجارية على بناء حضور قوي عبر جميع منصات التواصل الاجتماعي، من خلال استراتيجيات تسويقية مدروسة، وصناعة محتوى إبداعي، وإدارة الحسابات والحملات الإعلانية، وتحليل الأداء لتحقيق أهدافها وزيادة تفاعلها مع جمهورها."
+            : "We are Oxygen Consulting & Marketing. We help brands build a commanding presence across all social media platforms through data-driven marketing strategies, creative content production, end-to-end account and campaign management, and in-depth performance analytics that amplify engagement and achieve business goals.")
+        </p>
+        <blockquote class="p-4 rounded-3 border-start border-4 border-warning bg-white shadow-sm mb-4">
+          <p class="fs-5 fw-bold m-0 text-dark">
+            "@(isAr ? "نحوّل الميزانية الإعلانية إلى قرارات مبنية على البيانات." : "We transform ad budgets into data-driven decisions.")"
+          </p>
+          <small class="text-muted d-block mt-2">@(isAr ? "الهدف ليس إطلاق إعلان فقط، بل بناء دورة تحسين مستمرة." : "The goal isn't just launching ads—it's establishing an engine of continuous refinement.")</small>
+        </blockquote>
+      </div>
+
+      <div class="col-lg-5 text-center">
+        <div class="p-4 rounded-4 shadow bg-white border border-warning border-opacity-35">
+          <div class="oxygen-orbital-emblem mx-auto mb-3" style="width: 170px; height: 170px;" role="img" aria-label="Oxygen Logo Emblem">
+            <svg viewBox="0 0 200 200" class="orbital-ring-svg">
+              <defs>
+                <linearGradient id="aboutGoldRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#A67422" />
+                  <stop offset="50%" stop-color="#FBD965" />
+                  <stop offset="100%" stop-color="#C79A3B" />
+                </linearGradient>
+              </defs>
+              <circle cx="100" cy="100" r="76" fill="none" stroke="url(#aboutGoldRing)" stroke-width="12" opacity="0.96" />
+              <circle cx="100" cy="100" r="56" fill="none" stroke="#C79A3B" stroke-width="1.8" stroke-dasharray="5 5" opacity="0.55" class="orbital-dashed-path" />
+              <g class="orbital-bead-animator">
+                <circle cx="155" cy="50" r="10" fill="#FBD965" />
+              </g>
+            </svg>
+            <div class="orbital-logo-core">
+              <img src="~/images/logo-official-dark.png" alt="OXYGEN pure" style="width: 86px; height: auto;" />
+            </div>
+          </div>
+          <div class="display-5 fw-bold gold-gradient-text mb-2">+7</div>
+          <h4 class="h5 fw-bold text-dark mb-2">@Loc["YearsExperience"]</h4>
+          <p class="text-muted small m-0" style="line-height: 1.8;">
+            @(isAr 
+              ? "خبرة عملية تراكمية في الأسواق المحلية والدولية، مع إدارة ميزانيات إعلانية تخطت آلاف الحملات بنجاح." 
+              : "Proven hands-on track record across local and international markets, managing substantial budgets across 5,000+ campaigns.")
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Method 6-Step Framework (from PDF page 4) -->
+<section class="py-5" aria-label="Oxygen Methodology">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <div class="section-badge">METHODOLOGY</div>
+      <h2 class="section-title">@(isAr ? "منهجية أكسجين في العمل" : "The Oxygen Method")</h2>
+      <p class="section-subtitle">@(isAr ? "دورة تحسين مستمرة تضمن أعلى كفاءة لميزانيتك الإعلانية" : "A continuous optimization cycle engineered for sustainable ROI")</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="glass-card tilt-card h-100">
+          <span class="badge bg-warning bg-opacity-25 text-gold-light mb-3">01. Research</span>
+          <h3 class="h5 fw-bold text-white mb-2" style="font-family: var(--font-ar);">@(isAr ? "دراسة السوق والجمهور" : "Market & Audience Research")</h3>
+          <p class="service-card-desc m-0">@(isAr ? "تحليل دقيق لسلوك المستهلكين، نقاط القوة، والمنافسين لتحديد الفرص الاستثنائية." : "Granular analysis of consumer behavior, competitive positioning, and untapped niches.")</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="glass-card tilt-card h-100">
+          <span class="badge bg-warning bg-opacity-25 text-gold-light mb-3">02. Strategy</span>
+          <h3 class="h5 fw-bold text-white mb-2" style="font-family: var(--font-ar);">@(isAr ? "بناء الاستراتيجية" : "Strategic Architecture")</h3>
+          <p class="service-card-desc m-0">@(isAr ? "تحديد الأهداف التسويقية، هيكلة القنوات، وتخصيص الميزانيات وفق مؤشرات واضحة." : "Setting commercial objectives, distribution channels, and KPI-weighted budget allocation.")</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="glass-card tilt-card h-100">
+          <span class="badge bg-warning bg-opacity-25 text-gold-light mb-3">03. Launch</span>
+          <h3 class="h5 fw-bold text-white mb-2" style="font-family: var(--font-ar);">@(isAr ? "إطلاق الحملات" : "Multi-Channel Launch")</h3>
+          <p class="service-card-desc m-0">@(isAr ? "نشر وتفعيل الحملات مع استهداف جماهير مخصصة (Custom & Lookalike Audiences)." : "Deploying live ads with custom intent audiences and structured conversion tracking.")</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="glass-card tilt-card h-100">
+          <span class="badge bg-warning bg-opacity-25 text-gold-light mb-3">04. Optimize</span>
+          <h3 class="h5 fw-bold text-white mb-2" style="font-family: var(--font-ar);">@(isAr ? "تحسين مستمر" : "Continuous Optimization")</h3>
+          <p class="service-card-desc m-0">@(isAr ? "مراقبة تكلفة النقرة والمحادثات يومياً، واختبار تصاميم إبداعية جديدة (Creative Testing)." : "Daily CPC and conversation monitoring alongside ongoing A/B creative testing.")</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="glass-card tilt-card h-100">
+          <span class="badge bg-warning bg-opacity-25 text-gold-light mb-3">05. Scale</span>
+          <h3 class="h5 fw-bold text-white mb-2" style="font-family: var(--font-ar);">@(isAr ? "توسيع الحملات الناجحة" : "Dynamic Scaling")</h3>
+          <p class="service-card-desc m-0">@(isAr ? "ضخ الميزانيات في المجموعات الإعلانية ذات العائد الأعلى لمضاعفة النتائج." : "Funneling increased spend into peak-performing ad sets to maximize commercial return.")</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="glass-card tilt-card h-100">
+          <span class="badge bg-warning bg-opacity-25 text-gold-light mb-3">06. Report</span>
+          <h3 class="h5 fw-bold text-white mb-2" style="font-family: var(--font-ar);">@(isAr ? "تحليل وتقارير شفافة" : "Transparent Analytics")</h3>
+          <p class="service-card-desc m-0">@(isAr ? "تزويدك بتقارير دورية دقيقة تقيس الأداء الفعلي بالأرقام والمؤشرات المعتمدة." : "Delivering honest, executive reports with accredited metrics and strategic learnings.")</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Sectors & Experience (from PDF page 10) -->
+<section class="py-5 border-top border-secondary border-opacity-25" aria-label="Sectors and Experience">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <div class="section-badge">EXPERIENCE</div>
+      <h2 class="section-title">@(isAr ? "القطاعات والخبرات" : "Sectors & Industry Experience")</h2>
+      <p class="section-subtitle">@(isAr ? "سجل نجاح موثق في قطاعات تجارية وخدمية متعددة" : "A proven track record spanning essential commercial sectors")</p>
+    </div>
+
+    <div class="row g-3 text-center">
+      @{
+        var sectors = isAr
+          ? new[] { "01. المطاعم والأغذية", "02. العقارات والإسكانات", "03. قطاع الخدمات", "04. التجارة الإلكترونية", "05. التعليم والأكاديميات", "06. الصحة والجمال", "07. الإعلام والإنتاج", "08. قطاعات تجارية أخرى" }
+          : new[] { "01. Food & Beverage", "02. Real Estate & Housing", "03. Professional Services", "04. E-Commerce", "05. Education & Academies", "06. Health & Beauty Clinics", "07. Media & Production", "08. Other Commercial Sectors" };
+      }
+      @foreach (var sec in sectors)
+      {
+        <div class="col-6 col-md-3">
+          <div class="p-3 glass-card text-gold-light fw-bold">
+            @sec
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- CTA Bar -->
+<section class="py-5 text-center" style="background: #100D09;">
+  <div class="container py-3">
+    <h3 class="h2 fw-bold text-white mb-3">@(isAr ? "دعنا نبني استراتيجيتك القادمة" : "Let's Build Your Next Marketing Roadmap")</h3>
+    <a asp-controller="Home" asp-action="Contact" class="btn-gold fs-5 px-5 py-3 mt-2">
+      @Loc["GetInTouch"]
+    </a>
+  </div>
+</section>

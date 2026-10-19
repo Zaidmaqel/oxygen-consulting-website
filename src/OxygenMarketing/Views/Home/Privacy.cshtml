@@ -1,0 +1,65 @@
+@using System.Globalization
+@{
+    var isAr = CultureInfo.CurrentUICulture.Name.StartsWith("ar");
+    ViewData["Title"] = isAr ? "سياسة الخصوصية | مؤسسة أكسجين للاستشارات والتسويق" : "Privacy Policy | Oxygen Consulting & Marketing";
+}
+
+<section class="py-5 text-center position-relative" style="padding-top: 130px !important; background: radial-gradient(circle at 50% 30%, #261D12 0%, var(--dark) 75%);">
+  <div class="container py-4">
+    <h1 class="display-4 fw-bold text-white mb-3">@Loc["PrivacyPolicy"]</h1>
+    <p class="fs-5 text-cream-soft mx-auto" style="max-width: 700px;">
+      @(isAr ? "التزامنا التام بحماية خصوصية بيانات زوارنا وعملائنا." : "Our steadfast commitment to safeguarding client and visitor privacy.")
+    </p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container py-4">
+    <div class="glass-card p-4 p-md-5" style="line-height: 2;">
+      @if (isAr)
+      {
+        <h2 class="h4 text-gold-light mb-3">١. جمع المعلومات واستخدامها</h2>
+        <p class="text-cream-soft mb-4">
+          نحن في مؤسسة أكسجين للاستشارات والتسويق نلتزم بأعلى معايير الشفافية. نقوم بجمع المعلومات الشخصية (مثل الاسم، البريد الإلكتروني، ورقم الهاتف) فقط عندما يقدمها المستخدم طواعية عبر نموذج الاتصال أو استوديو الحملات، وذلك لغرض الرد على الاستفسارات وتقديم عروض الأسعار والخدمات المطلوبة.
+        </p>
+
+        <h2 class="h4 text-gold-light mb-3">٢. ملفات تعريف الارتباط (Cookies)</h2>
+        <p class="text-cream-soft mb-4">
+          يستخدم موقعنا ملفات تعريف ارتباط وظيفية لتذكر تفضيلاتك اللغوية (العربية أو الإنجليزية) وحفظ جلسة التصفح لضمان تجربة مستخدم سلسة ومثلى. لا نستخدم ملفات تتبع تدخّلية تضر بخصوصيتك.
+        </p>
+
+        <h2 class="h4 text-gold-light mb-3">٣. أمن البيانات وحمايتها</h2>
+        <p class="text-cream-soft mb-4">
+          نتخذ تدابير أمنية وتقنية متقدمة لحماية بياناتك من الوصول غير المصرح به أو التعديل أو الإفصاح. لا نقوم إطلاقاً ببيع أو تأجير أو مشاركة بياناتك الشخصية مع أي أطراف ثالثة لأغراض تسويقية تجارية.
+        </p>
+
+        <h2 class="h4 text-gold-light mb-3">٤. التواصل معنا</h2>
+        <p class="text-cream-soft m-0">
+          إذا كانت لديك أية أسئلة حول سياسة الخصوصية الخاصة بنا، يمكنك التواصل معنا مباشرة عبر البريد الإلكتروني: <a href="mailto:infooxygenmedia2022@gmail.com" class="text-gold-light">infooxygenmedia2022@gmail.com</a> أو هاتفياً على الرقم <span dir="ltr">+962 7 9669 0421</span>.
+        </p>
+      }
+      else
+      {
+        <h2 class="h4 text-gold-light mb-3">1. Information Collection and Use</h2>
+        <p class="text-cream-soft mb-4">
+          At Oxygen Consulting &amp; Marketing, we prioritize your data privacy. We collect personal information (such as your name, email address, and telephone number) strictly when voluntarily provided via our contact or Campaign Studio forms, solely for answering inquiries and delivering requested marketing proposals.
+        </p>
+
+        <h2 class="h4 text-gold-light mb-3">2. Cookies and Preferences</h2>
+        <p class="text-cream-soft mb-4">
+          Our website utilizes functional session cookies exclusively to remember your language preference (Arabic or English) and maintain responsive navigation. We do not deploy intrusive third-party cross-site trackers.
+        </p>
+
+        <h2 class="h4 text-gold-light mb-3">3. Data Security and Confidentiality</h2>
+        <p class="text-cream-soft mb-4">
+          We implement rigorous technical and operational safeguards to protect your personal details against unauthorized access, loss, or disclosure. We never sell, rent, or trade your contact information with external commercial entities.
+        </p>
+
+        <h2 class="h4 text-gold-light mb-3">4. Contact Information</h2>
+        <p class="text-cream-soft m-0">
+          If you have any questions regarding this Privacy Policy, please contact us at: <a href="mailto:infooxygenmedia2022@gmail.com" class="text-gold-light">infooxygenmedia2022@gmail.com</a> or via phone at <span dir="ltr">+962 7 9669 0421</span>.
+        </p>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,115 @@
+@model OxygenMarketing.ViewModels.PortfolioViewModel
+@using System.Globalization
+@{
+    var isAr = CultureInfo.CurrentUICulture.Name.StartsWith("ar");
+    ViewData["Title"] = isAr ? "أعمالنا ودراسات الحالة | مؤسسة أكسجين للاستشارات والتسويق" : "Our Portfolio & Case Studies | Oxygen Consulting & Marketing";
+    ViewData["MetaDescription"] = isAr
+        ? "استعرض نتائج دراسات الحالة الفعلية لحملات أكسجين في قطاعات الملابس، عيادات التجميل، الإسكانات، والمراكز التعليمية."
+        : "Explore verified real-world case studies of Oxygen campaigns across fashion, aesthetics, real estate, and education.";
+}
+
+<!-- Page Header Hero -->
+<section class="py-5 text-center position-relative" style="padding-top: 130px !important; background: radial-gradient(circle at 50% 30%, #261D12 0%, var(--dark) 75%);">
+  <div class="container py-4">
+    <div class="section-badge">@Loc["NavPortfolio"]</div>
+    <h1 class="display-4 fw-bold text-white mb-3">@Loc["CaseStudiesTitle"]</h1>
+    <p class="fs-5 text-cream-soft mx-auto" style="max-width: 750px;">
+      @(isAr ? "بيانات حقيقية ونتائج موثقة من واقع الحملات التسويقية التي أدرناها لعملائنا في مختلف القطاعات." : "Empirical data and accredited performance benchmarks from actual client campaigns.")
+    </p>
+  </div>
+</section>
+
+<!-- Filterable Grid Section -->
+<section class="py-5" aria-label="Filterable Case Studies Grid">
+  <div class="container py-4">
+    <!-- Sector Filter Pills -->
+    <div class="d-flex flex-wrap justify-content-center gap-2 mb-5">
+      <a asp-action="Portfolio" asp-route-sector="" class="studio-pill-option @(string.IsNullOrEmpty(Model.SelectedSector) ? "active" : "")">
+        @Loc["FilterAll"]
+      </a>
+      @foreach (var s in Model.Sectors)
+      {
+        <a asp-action="Portfolio" asp-route-sector="@s" class="studio-pill-option @(Model.SelectedSector == s ? "active" : "")">
+          @s
+        </a>
+      }
+    </div>
+
+    <!-- Case Studies Cards Grid -->
+    <div class="row g-4">
+      @if (Model.CaseStudies.Count == 0)
+      {
+        <div class="col-12 text-center py-5">
+          <p class="fs-4 text-muted">@(isAr ? "لا توجد دراسات حالة في هذا القطاع حالياً." : "No case studies found for this sector.")</p>
+          <a asp-action="Portfolio" class="btn-glass mt-3">@Loc["FilterAll"]</a>
+        </div>
+      }
+      else
+      {
+        @foreach (var c in Model.CaseStudies)
+        {
+          <div class="col-lg-6">
+            <div class="glass-card tilt-card h-100 p-0 overflow-hidden d-flex flex-column justify-content-between">
+              <div>
+                <div class="position-relative">
+                  <img src="@(c.ImagePath ?? "/images/cases/case-clothing.jpg")" alt="@(isAr ? c.TitleAr : c.TitleEn)" class="img-fluid w-100" style="height: 250px; object-fit: cover;" />
+                  <div class="position-absolute top-0 end-0 m-3">
+                    <span class="badge bg-dark bg-opacity-75 border border-warning text-gold-light px-3 py-2">
+                      @(isAr ? c.IndustryAr : c.IndustryEn)
+                    </span>
+                  </div>
+                </div>
+
+                <div class="p-4">
+                  <h2 class="h4 fw-bold text-white mb-2" style="font-family: var(--font-ar); letter-spacing: -0.01em;">@(isAr ? c.TitleAr : c.TitleEn)</h2>
+                  <p class="service-card-desc mb-4">
+                    @(isAr ? c.DescriptionAr : c.DescriptionEn)
+                  </p>
+
+                  <!-- Performance KPI Cards -->
+                  <div class="row g-2 text-center py-3 border-top border-bottom border-secondary border-opacity-25 mb-4" style="background: rgba(199, 154, 59, 0.05); border-radius: 12px;">
+                    @if (c.Budget.HasValue)
+                    {
+                      <div class="col-3">
+                        <small class="text-white-50 d-block" style="font-size: 0.75rem;">@(isAr ? "الميزانية" : "Spend")</small>
+                        <span class="fw-bold text-gold-light fs-6">$@c.Budget.Value.ToString("N0")</span>
+                      </div>
+                    }
+                    @if (c.Reach.HasValue)
+                    {
+                      <div class="col-3">
+                        <small class="text-white-50 d-block" style="font-size: 0.75rem;">@(isAr ? "الوصول" : "Reach")</small>
+                        <span class="fw-bold text-gold-light fs-6">@c.Reach.Value.ToString("N0")</span>
+                      </div>
+                    }
+                    @if (c.Conversations.HasValue)
+                    {
+                      <div class="col-3">
+                        <small class="text-white-50 d-block" style="font-size: 0.75rem;">@(isAr ? "المحادثات" : "Convs")</small>
+                        <span class="fw-bold text-gold-light fs-6">@c.Conversations.Value.ToString("N0")</span>
+                      </div>
+                    }
+                    @if (c.Cpc.HasValue)
+                    {
+                      <div class="col-3">
+                        <small class="text-white-50 d-block" style="font-size: 0.75rem;">@(isAr ? "تكلفة النقرة" : "CPC")</small>
+                        <span class="fw-bold text-gold-light fs-6">$@c.Cpc.Value.ToString("F2")</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-4 pt-0">
+                <a asp-action="CaseStudy" asp-route-id="@c.Id" class="btn-glass w-100 text-center py-2">
+                  <span>@Loc["ViewCaseDetails"]</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</section>

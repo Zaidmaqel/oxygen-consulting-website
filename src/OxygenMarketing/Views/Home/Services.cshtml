@@ -1,0 +1,140 @@
+@model List<OxygenMarketing.Models.Service>
+@using System.Globalization
+@{
+    var isAr = CultureInfo.CurrentUICulture.Name.StartsWith("ar");
+    ViewData["Title"] = isAr ? "خدماتنا | مؤسسة أكسجين للاستشارات والتسويق" : "Our Services | Oxygen Consulting & Marketing";
+    ViewData["MetaDescription"] = isAr
+        ? "خدمات أكسجين للتسويق الرقمي: استراتيجيات التواصل، صناعة المحتوى الإبداعي، إدارة الحسابات، الحملات الممولة، وتحليل الأداء والتقارير."
+        : "Oxygen Digital Marketing Services: Social strategy, creative content production, account management, paid ad campaigns, and KPI analytics.";
+}
+
+<!-- Page Header Hero -->
+<section class="py-5 text-center position-relative" style="padding-top: 130px !important; background: radial-gradient(circle at 50% 30%, #261D12 0%, var(--dark) 75%);">
+  <div class="container py-4">
+    <div class="section-badge">@Loc["NavServices"]</div>
+    <h1 class="display-4 fw-bold text-white mb-3">@Loc["ServicesSectionSubtitle"]</h1>
+    <p class="fs-5 text-cream-soft mx-auto" style="max-width: 750px;">
+      @(isAr 
+        ? "حلول تسويقية متكاملة تُصمم خصيصاً لدفع نمو أعمالك وتحويل الميزانية إلى نتائج ملموسة."
+        : "Engineered marketing solutions tailored to accelerate growth and convert budgets into verifiable ROI.")
+    </p>
+  </div>
+</section>
+
+<!-- The 5 Core Services Grid -->
+<section class="py-5" aria-label="Core Marketing Services">
+  <div class="container py-4">
+    <div class="row g-5">
+      @foreach (var s in Model)
+      {
+        <div class="col-lg-6">
+          <div class="glass-card tilt-card h-100 p-4 p-md-5 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <span class="badge bg-warning bg-opacity-25 text-gold-light fs-6 px-3 py-1">0@(s.SortOrder)</span>
+                <span class="fs-2">
+                  @switch (s.Icon)
+                  {
+                    case "compass": <span>🧭</span> break;
+                    case "sparkles": <span>✨</span> break;
+                    case "share-nodes": <span>🌐</span> break;
+                    case "bullhorn": <span>📢</span> break;
+                    case "chart-line": <span>📈</span> break;
+                    default: <span>✦</span> break;
+                  }
+                </span>
+              </div>
+              <h2 class="h4 fw-bold text-white mb-3">@(isAr ? s.TitleAr : s.TitleEn)</h2>
+              <p class="text-cream-soft mb-4" style="line-height: 1.9; font-size: 1.05rem;">
+                @(isAr ? s.DescriptionAr : s.DescriptionEn)
+              </p>
+            </div>
+
+            <div class="pt-3 border-top border-secondary border-opacity-25 d-flex align-items-center justify-content-between">
+              <a href="/#campaign-studio" class="btn-gold py-2 px-3 small">
+                <span>@(isAr ? "احسب في الاستوديو" : "Configure in Studio")</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <a asp-controller="Home" asp-action="Contact" class="text-gold-light text-decoration-none small fw-semibold">
+                @Loc["GetInTouch"] →
+              </a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Capabilities Deep Dive (from PDF page 3) -->
+<section class="section-cream py-5" aria-label="Specialized Capabilities">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <div class="section-badge">CAPABILITIES</div>
+      <h2 class="section-title text-dark">@(isAr ? "ماذا ندير في أكسجين؟" : "What We Manage")</h2>
+      <p class="section-subtitle">@(isAr ? "تفاصيل تكتيكية متخصصة تضمن دقة التنفيذ وكفاءة الإنفاق" : "Tactical execution capabilities across the entire customer journey")</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-3 shadow-sm border border-warning border-opacity-25 h-100">
+          <span class="fw-bold text-gold-dark d-block mb-1">01</span>
+          <h3 class="h5 fw-bold text-dark mb-2">@(isAr ? "استراتيجية الحملات" : "Campaign Strategy")</h3>
+          <p class="text-muted small m-0">@(isAr ? "تحديد الهدف، دراسة الجمهور المستهدف، هندسة الميزانية، ومؤشرات الأداء." : "Objective definition, precise audience mapping, budget architecture, and KPI thresholds.")</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-3 shadow-sm border border-warning border-opacity-25 h-100">
+          <span class="fw-bold text-gold-dark d-block mb-1">02</span>
+          <h3 class="h5 fw-bold text-dark mb-2">@(isAr ? "الحملات الإعلانية المدفوعة" : "Paid Ads Execution")</h3>
+          <p class="text-muted small m-0">@(isAr ? "ندير حملاتك الإعلانية المدفوعة عبر منصات التواصل للوصول إلى جمهورك المستهدف." : "Managing targeted multi-platform ad campaigns to reach high-value intent audiences.")</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-3 shadow-sm border border-warning border-opacity-25 h-100">
+          <span class="fw-bold text-gold-dark d-block mb-1">03</span>
+          <h3 class="h5 fw-bold text-dark mb-2">@(isAr ? "توليد العملاء المحتملين" : "Lead Generation")</h3>
+          <p class="text-muted small m-0">@(isAr ? "حملات مخصصة لتوليد العملاء المؤهلين وتحسين تكلفة الاكتساب والتحويل." : "Dedicated funnels capturing qualified prospects with optimized cost-per-acquisition.")</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-3 shadow-sm border border-warning border-opacity-25 h-100">
+          <span class="fw-bold text-gold-dark d-block mb-1">04</span>
+          <h3 class="h5 fw-bold text-dark mb-2">@(isAr ? "إعادة الاستهداف (Retargeting)" : "Retargeting & Remarketing")</h3>
+          <p class="text-muted small m-0">@(isAr ? "إعادة استهداف المتفاعلين والزوار والعملاء المحتملين لإتمام عمليات الشراء والتواصل." : "Re-engaging website visitors, video viewers, and past leads to convert interest into revenue.")</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-3 shadow-sm border border-warning border-opacity-25 h-100">
+          <span class="fw-bold text-gold-dark d-block mb-1">05</span>
+          <h3 class="h5 fw-bold text-dark mb-2">@(isAr ? "اختبار التصاميم (Creative Testing)" : "Creative Testing")</h3>
+          <p class="text-muted small m-0">@(isAr ? "اختبار مستمر للرسائل الإعلانية، التصاميم، والفيديوهات لاكتشاف الأفضل أداءً." : "A/B testing ad copy, motion hooks, and visual formats to discover peak-converting assets.")</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-4 bg-white rounded-3 shadow-sm border border-warning border-opacity-25 h-100">
+          <span class="fw-bold text-gold-dark d-block mb-1">06</span>
+          <h3 class="h5 fw-bold text-dark mb-2">@(isAr ? "متابعة الأداء وإعادة التوزيع" : "Optimization & Reporting")</h3>
+          <p class="text-muted small m-0">@(isAr ? "متابعة دقيقة للأداء، إعادة توزيع ذكية للميزانية، وتقارير أداء دورية واضحة." : "Daily telemetry monitoring, dynamic spend reallocation, and transparent KPI digests.")</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom CTA -->
+<section class="py-5 text-center" style="background: #14110C;">
+  <div class="container py-4">
+    <div class="display-statement mb-3">
+      @(isAr ? "جاهز لإطلاق حملتك القادمة؟" : "Ready to Launch Your Next Campaign?")
+    </div>
+    <div class="d-flex justify-content-center gap-3">
+      <a href="/#campaign-studio" class="btn-gold fs-5 px-4 py-3">
+        @Loc["BuildCampaign"]
+      </a>
+      <a asp-controller="Home" asp-action="Contact" class="btn-glass fs-5 px-4 py-3">
+        @Loc["GetInTouch"]
+      </a>
+    </div>
+  </div>
+</section>

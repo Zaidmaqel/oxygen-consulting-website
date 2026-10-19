@@ -1,0 +1,1212 @@
+@model OxygenMarketing.ViewModels.HomeViewModel
+@using System.Globalization
+@{
+    var isAr = CultureInfo.CurrentUICulture.Name.StartsWith("ar");
+    ViewData["Title"] = isAr ? "مؤسسة أكسجين للاستشارات والتسويق | دع علامتك تتنفس" : "Oxygen Consulting & Marketing | Let Your Brand Breathe";
+    ViewData["MetaDescription"] = isAr 
+        ? "مؤسسة أكسجين للاستشارات والتسويق — نحوّل الميزانية الإعلانية إلى قرارات مبنية على البيانات. استراتيجيات تسويقية، صناعة محتوى إبداعي، وإدارة حملات مدروسة."
+        : "Oxygen Consulting & Marketing — Transforming advertising budgets into data-driven decisions. Social strategy, creative content, and high-performance campaigns.";
+}
+
+<!-- ==========================================
+     1. 3D HERO SECTION (Three.js Translucent Ring)
+     ========================================== -->
+<section class="hero-section" id="hero" aria-label="Hero Section">
+  <!-- Interactive WebGL Canvas Container -->
+  <div id="hero-canvas-container" aria-hidden="true"></div>
+
+  <div class="container hero-content">
+    <!-- Oxygen Official Emblem Showcase at Start of Hero Section -->
+    <div class="hero-brand-emblem-wrap mb-3" role="img" aria-label="Oxygen Consulting & Marketing">
+      <div class="oxygen-orbital-emblem hero-orbital-emblem mx-auto">
+        <svg viewBox="0 0 200 200" class="orbital-ring-svg">
+          <defs>
+            <linearGradient id="heroGoldRing" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#A67422" />
+              <stop offset="50%" stop-color="#FBD965" />
+              <stop offset="100%" stop-color="#C79A3B" />
+            </linearGradient>
+            <filter id="heroGoldGlow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          <!-- Outer Golden Orbit Ring -->
+          <circle cx="100" cy="100" r="76" fill="none" stroke="url(#heroGoldRing)" stroke-width="10" opacity="0.95" />
+          <!-- Inner Dashed Trajectory Ring -->
+          <circle cx="100" cy="100" r="56" fill="none" stroke="#FBD965" stroke-width="1.8" stroke-dasharray="5 5" opacity="0.65" class="orbital-dashed-path" />
+          <!-- Orbiting Satellite Bead -->
+          <g class="orbital-bead-animator">
+            <circle cx="155" cy="50" r="9" fill="#FBD965" filter="url(#heroGoldGlow)" />
+          </g>
+        </svg>
+        <!-- Official Logo Centered in Orbit -->
+        <div class="orbital-logo-core">
+          <img src="~/images/logo-official-dark.png" alt="OXYGEN pure Consulting & Marketing" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Breathing Badge -->
+    <div class="d-inline-flex align-items-center gap-2 section-badge breathe-element mb-3">
+      <span class="d-inline-block rounded-circle" style="width: 8px; height: 8px; background: var(--gold-light); box-shadow: 0 0 10px var(--gold-light);"></span>
+      <span>@(isAr ? "وكالة استشارات وتسويق رقمي متقدمة" : "Advanced Social Marketing & Consulting")</span>
+    </div>
+
+    <!-- Main Headline with Animated Shimmer Gradient Wordmark -->
+    <h1 class="hero-title">
+      @if (isAr)
+      {
+        <span>دع علامتك التجارية</span> <span class="gold-gradient-text">تتنفس</span>
+      }
+      else
+      {
+        <span>Let Your Brand</span> <span class="gold-gradient-text">Breathe</span>
+      }
+    </h1>
+
+    <p class="hero-subtitle">
+      @(isAr 
+        ? "نحوّل الميزانية الإعلانية إلى قرارات مبنية على البيانات. من خلال استراتيجيات تسويقية مدروسة، صناعة محتوى إبداعي، وإدارة حملات تحقق أهدافك وتزيد تفاعل جمهورك."
+        : "Transforming advertising budgets into data-driven decisions. High-impact creative content, strategic account management, and verified multi-channel campaigns that elevate brand authority.")
+    </p>
+
+    <!-- Action Buttons -->
+    <div class="d-flex flex-wrap items-center justify-content-center gap-3 mt-4">
+      <a href="#campaign-studio" class="btn-gold">
+        <span>@Loc["BuildCampaign"]</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </a>
+      <a href="#portfolio" class="btn-glass">
+        <span>@Loc["ExploreWork"]</span>
+      </a>
+    </div>
+
+    <!-- Performance Highlights Bar -->
+    <div class="row g-3 justify-content-center mt-5 pt-4 border-top border-secondary border-opacity-25 text-start">
+      <div class="col-6 col-md-3 text-center">
+        <div class="h2 fw-bold text-gold-light mb-1 gold-gradient-text">+7</div>
+        <div class="small text-muted">@Loc["YearsExperience"]</div>
+      </div>
+      <div class="col-6 col-md-3 text-center">
+        <div class="h2 fw-bold text-gold-light mb-1 gold-gradient-text">+5,000</div>
+        <div class="small text-muted">@Loc["CampaignsRun"]</div>
+      </div>
+      <div class="col-6 col-md-3 text-center">
+        <div class="h2 fw-bold text-gold-light mb-1 gold-gradient-text">@(isAr ? "محلي ودولي" : "Local & Global")</div>
+        <div class="small text-muted">@Loc["HighlightsLocalGlobal"]</div>
+      </div>
+      <div class="col-6 col-md-3 text-center">
+        <div class="h2 fw-bold text-gold-light mb-1 gold-gradient-text">100%</div>
+        <div class="small text-muted">@Loc["HighlightsMethod"]</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     2. ACCREDITED GLOBAL PLATFORMS & TACTICAL ECOSYSTEM
+     ========================================== -->
+<section class="platforms-ecosystem-section" id="platforms" aria-label="Official Advertising Platforms and Capabilities">
+  <div class="platforms-eco-glow"></div>
+  
+  <div class="container position-relative" style="z-index: 2;">
+    <!-- Section Header -->
+    <div class="text-center mb-5">
+      <div class="d-inline-flex align-items-center gap-2 section-badge mb-3">
+        <span class="text-gold">✦</span>
+        <span>@(isAr ? "منظومة المنصات الإعلانية المعتمدة" : "Accredited Global Ad Networks")</span>
+        <span class="text-gold">✦</span>
+      </div>
+      <h2 class="section-title text-center mb-2">
+        @(isAr ? "شراكات واستهداف مباشر بأعلى عائد استثماري" : "Direct Multi-Platform Execution with Proven ROAS")
+      </h2>
+      <p class="section-subtitle text-center mx-auto" style="max-width: 720px;">
+        @(isAr 
+          ? "ندير ونوجّه ميزانيتك على أقوى المنصات العالمية وفق خوارزميات الذكاء الاصطناعي والاستهداف الدقيق لتحقيق أعلى ربحية وأقل تكلفة استحواذ."
+          : "We engineer and scale advertising campaigns directly across premier global networks using precision micro-targeting and algorithmic optimization.")
+      </p>
+    </div>
+
+    <!-- 1. The 6 Major Accredited Platforms (Clean 3-Column Luxury Grid) -->
+    <div class="platform-card-grid">
+      <!-- 1. Meta (Facebook & Instagram) -->
+      <div class="platform-eco-card">
+        <div>
+          <div class="platform-eco-header">
+            <div class="platform-eco-icon-wrap">
+              <div class="platform-eco-icon" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </div>
+              <div>
+                <h3 class="platform-eco-title">Instagram & Meta</h3>
+                <span class="platform-eco-tag">Meta Advantage+</span>
+              </div>
+            </div>
+            <span class="platform-eco-badge">@(isAr ? "ذكاء اصطناعي وبكسل" : "Pixel AI Engine")</span>
+          </div>
+          <p class="platform-eco-desc">
+            @(isAr 
+              ? "إدارة متقدمة لحملات التحويل وإعادة الاستهداف الذكية للوصول للجمهور الأكثر استعداداً للشراء ورفع التفاعل الفوري."
+              : "Advanced conversion campaigns, intelligent pixel retargeting, and high-intent customer acquisition funnels.")
+          </p>
+        </div>
+        <div class="platform-eco-footer">
+          <span class="platform-eco-kpi">
+            <span>@(isAr ? "متوسط العائد:" : "Avg ROAS:")</span>
+            <span class="platform-eco-kpi-val">+380% ROAS</span>
+          </span>
+          <span class="text-white-50 small">@(isAr ? "استحواذ فوري" : "Instant Growth")</span>
+        </div>
+      </div>
+
+      <!-- 2. TikTok for Business -->
+      <div class="platform-eco-card">
+        <div>
+          <div class="platform-eco-header">
+            <div class="platform-eco-icon-wrap">
+              <div class="platform-eco-icon" style="background: #010101; border: 1px solid rgba(255,255,255,0.2);">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#00f2fe">
+                  <path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-2.891 2.892 2.896 2.896 0 0 1-2.892-2.892 2.896 2.896 0 0 1 2.892-2.892c.38 0 .741.076 1.073.214V9.43a6.34 6.34 0 0 0-1.073-.092A6.343 6.343 0 0 0 3 15.68a6.343 6.343 0 0 0 6.344 6.344 6.343 6.343 0 0 0 6.344-6.344V8.897a8.21 8.21 0 0 0 4.902 1.603V7.054a4.808 4.808 0 0 1-1-.368z" fill="#FE2C55" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="platform-eco-title">TikTok for Business</h3>
+                <span class="platform-eco-tag">Spark Ads & Viral</span>
+              </div>
+            </div>
+            <span class="platform-eco-badge">@(isAr ? "انتشار فيروسي" : "Viral Impact")</span>
+          </div>
+          <p class="platform-eco-desc">
+            @(isAr 
+              ? "إنتاج فيديوهات خطافية سريعة تجتاح المنصة واستثمار إعلانات Spark Ads للوصول لأعلى معدلات حفظ ومشاركة ومبيعات."
+              : "High-retention 3-second hook creatives and Spark Ad acceleration for viral reach and audience conversion.")
+          </p>
+        </div>
+        <div class="platform-eco-footer">
+          <span class="platform-eco-kpi">
+            <span>@(isAr ? "معدل الحفظ:" : "Save Rate:")</span>
+            <span class="platform-eco-kpi-val">+420%</span>
+          </span>
+          <span class="text-white-50 small">@(isAr ? "ترندات مدروسة" : "Trend Strategy")</span>
+        </div>
+      </div>
+
+      <!-- 3. Google PPC & Search -->
+      <div class="platform-eco-card">
+        <div>
+          <div class="platform-eco-header">
+            <div class="platform-eco-icon-wrap">
+              <div class="platform-eco-icon" style="background: #FFFFFF;">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z" />
+                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.13C3.25 21.37 7.31 24 12 24z" />
+                  <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.25C.45 8.17 0 9.97 0 12s.45 3.83 1.25 5.42l4.03-3.13z" />
+                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.25 2.63 1.25 6.58l4.03 3.13c.95-2.83 3.6-4.96 6.72-4.96z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="platform-eco-title">Google Search & PPC</h3>
+                <span class="platform-eco-tag">High-Intent Keywords</span>
+              </div>
+            </div>
+            <span class="platform-eco-badge">@(isAr ? "زبون جاهز للشراء" : "Ready Buyer")</span>
+          </div>
+          <p class="platform-eco-desc">
+            @(isAr 
+              ? "الظهور الحصري في صدارة نتائج البحث أمام الزبون المستعد للشراء لحظة بحثه عن خدمتك أو منتجك بأقل تكلفة نقرة."
+              : "Dominating search engine results when customers are actively searching to buy your specific services.")
+          </p>
+        </div>
+        <div class="platform-eco-footer">
+          <span class="platform-eco-kpi">
+            <span>@(isAr ? "تكلفة النقرة:" : "CPC Efficiency:")</span>
+            <span class="platform-eco-kpi-val">-45% CPC</span>
+          </span>
+          <span class="text-white-50 small">@(isAr ? "أعلى جودة طلب" : "High Intent")</span>
+        </div>
+      </div>
+
+      <!-- 4. Snapchat Direct Ads -->
+      <div class="platform-eco-card">
+        <div>
+          <div class="platform-eco-header">
+            <div class="platform-eco-icon-wrap">
+              <div class="platform-eco-icon" style="background: #FFFC00;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#000000">
+                  <path d="M12.001 2.25c-4.135 0-6.19 3.033-6.19 5.86 0 1.258.45 2.505 1.096 3.428-.157.514-.77 1.03-1.637 1.266-.34.093-.578.4-.578.752 0 .412.316.755.728.795.733.072 1.408.384 1.83 1.03.208.318.15.74-.138 1-.502.453-1.42 1.085-2.614 1.348-.31.069-.533.342-.533.66 0 .408.361.733.766.697 1.638-.145 3.32-.873 4.29-1.57.545-.392 1.25-.456 1.85-.169.69.33 1.455.503 2.224.503.77 0 1.535-.173 2.224-.503.6-.287 1.305-.223 1.85.169.97.697 2.652 1.425 4.29 1.57.405.036.766-.289.766-.697 0-.318-.223-.591-.533-.66-1.194-.263-2.112-.895-2.614-1.348-.288-.26-.346-.682-.138-1 .422-.646 1.097-.958 1.83-1.03.412-.04.728-.383.728-.795 0-.352-.238-.659-.578-.752-.867-.236-1.48-.752-1.637-1.266.646-.923 1.096-2.17 1.096-3.428 0-2.827-2.055-5.86-6.19-5.86z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="platform-eco-title">Snapchat Direct Ads</h3>
+                <span class="platform-eco-tag">Swipe-Up & Chat</span>
+              </div>
+            </div>
+            <span class="platform-eco-badge">@(isAr ? "محادثات مبيعات فورية" : "Direct Chat")</span>
+          </div>
+          <p class="platform-eco-desc">
+            @(isAr 
+              ? "إعلانات تفاعلية كاملة الشاشة تفتح محادثات مباشرة فورية مع الزبائن للشراء والحجز السريع لقطاعات العيادات والتجزئة."
+              : "Full-screen vertical formats tailored for direct sales inquiries, appointment booking, and instant conversions.")
+          </p>
+        </div>
+        <div class="platform-eco-footer">
+          <span class="platform-eco-kpi">
+            <span>@(isAr ? "سرعة الاستجابة:" : "Direct Convs:")</span>
+            <span class="platform-eco-kpi-val">+5,000+</span>
+          </span>
+          <span class="text-white-50 small">@(isAr ? "حجز واستفسار فوري" : "Direct Leads")</span>
+        </div>
+      </div>
+
+      <!-- 5. LinkedIn B2B Ads -->
+      <div class="platform-eco-card">
+        <div>
+          <div class="platform-eco-header">
+            <div class="platform-eco-icon-wrap">
+              <div class="platform-eco-icon" style="background: #0A66C2;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                  <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0-.02-3.28 1.64 1.64 0 0 0 .02 3.28M5.07 18.5h2.79v-8.37H5.07v8.37z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="platform-eco-title">LinkedIn B2B Ads</h3>
+                <span class="platform-eco-tag">Enterprise Decision Makers</span>
+              </div>
+            </div>
+            <span class="platform-eco-badge">@(isAr ? "استهداف الشركات" : "Corporate B2B")</span>
+          </div>
+          <p class="platform-eco-desc">
+            @(isAr 
+              ? "استهداف دقيق بالمنصب الوظيفي والقطاع للوصول للمدراء التنفيذيين وأصحاب القرار لصفقات الشركات والخدمات الراقية."
+              : "Hyper-targeted B2B campaigns reaching C-level executives, corporate buyers, and enterprise stakeholders.")
+          </p>
+        </div>
+        <div class="platform-eco-footer">
+          <span class="platform-eco-kpi">
+            <span>@(isAr ? "دقة الاستهداف:" : "Accuracy:")</span>
+            <span class="platform-eco-kpi-val">99% B2B</span>
+          </span>
+          <span class="text-white-50 small">@(isAr ? "صفقات كبرى" : "High Ticket")</span>
+        </div>
+      </div>
+
+      <!-- 6. WhatsApp Conversions Funnel -->
+      <div class="platform-eco-card">
+        <div>
+          <div class="platform-eco-header">
+            <div class="platform-eco-icon-wrap">
+              <div class="platform-eco-icon" style="background: #25D366;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFFFFF">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="platform-eco-title">WhatsApp Conversions</h3>
+                <span class="platform-eco-tag">Direct Sales Funnels</span>
+              </div>
+            </div>
+            <span class="platform-eco-badge">@(isAr ? "إغلاق مبيعات فوري" : "Instant Closures")</span>
+          </div>
+          <p class="platform-eco-desc">
+            @(isAr 
+              ? "مسارات تحويل ذكية تربط الحملات الإعلانية مباشرة بمحادثات واتساب مخصصة لإتمام عمليات البيع مع فريقك فوراً."
+              : "Streamlined click-to-WhatsApp funnels connecting ready shoppers directly to your sales team for instant closing.")
+          </p>
+        </div>
+        <div class="platform-eco-footer">
+          <span class="platform-eco-kpi">
+            <span>@(isAr ? "معدل الإغلاق:" : "Close Rate:")</span>
+            <span class="platform-eco-kpi-val">+65%</span>
+          </span>
+          <span class="text-white-50 small">@(isAr ? "تحويلات مباشرة" : "Direct Funnels")</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. The 4 Tactical Superpowers (Organized 4-Column Row) -->
+    <div class="tactical-pillars-section">
+      <div class="tactical-pillars-header">
+        <h3 class="h4 fw-bold text-white mb-2">
+          @(isAr ? "الركائز التكتيكية الأربع لقوة أكسجين" : "The 4 Tactical Pillars of Oxygen Execution")
+        </h3>
+        <p class="text-white-50 small m-0">
+          @(isAr ? "معايير دقيقة تحكم كل حملة إعلانية نطلقها لضمان عدم إهدار أي دولار" : "The non-negotiable execution standards behind every campaign we scale.")
+        </p>
+      </div>
+
+      <div class="tactical-pillars-grid">
+        <!-- Pillar 1 -->
+        <div class="tactical-pillar-card">
+          <span class="tactical-pillar-icon">💎</span>
+          <h4 class="tactical-pillar-title">@(isAr ? "بيانات وقرارات مدروسة" : "Data-Driven Decisions")</h4>
+          <p class="tactical-pillar-desc">
+            @(isAr ? "لا نعتمد على التخمين مطلقاً؛ كل دولار يتم تحليله عبر تجارب A/B مستمرة لضمان أعلى عائد استثماري." : "Zero guesswork. Every dollar is backed by empirical analytics, variant testing, and ROI optimization.")
+          </p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="tactical-pillar-card">
+          <span class="tactical-pillar-icon">🎯</span>
+          <h4 class="tactical-pillar-title">@(isAr ? "استهداف ميكرو دقيق" : "High-Intent Micro-Targeting")</h4>
+          <p class="tactical-pillar-desc">
+            @(isAr ? "نحدد الجمهور بناءً على نية الشراء الحقيقية والسلوك الرقمي الفعلي، لنصل للعميل الجاهز للدفع." : "Reaching buyers with verified purchasing intent and real behavior, not casual passive scrollers.")
+          </p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="tactical-pillar-card">
+          <span class="tactical-pillar-icon">🎬</span>
+          <h4 class="tactical-pillar-title">@(isAr ? "صناعة محتوى سينمائي" : "Cinematic 3-Second Hooks")</h4>
+          <p class="tactical-pillar-desc">
+            @(isAr ? "سيناريوهات وتصوير يشد انتباه العميل في أول 3 ثوانٍ ليمنعه من التمرير ويقنعه باتخاذ القرار." : "Compelling video creative engineered with arresting visual hooks that stop the scroll and drive action.")
+          </p>
+        </div>
+
+        <!-- Pillar 4 -->
+        <div class="tactical-pillar-card">
+          <span class="tactical-pillar-icon">🛡️</span>
+          <h4 class="tactical-pillar-title">@(isAr ? "حماية من الهدر الإعلاني" : "Zero-Waste Budget Guardrails")</h4>
+          <p class="tactical-pillar-desc">
+            @(isAr ? "مراقبة يومية صارمة للميزانية تضمن تخفيض تكلفة النقرة والاستحواذ إلى الحد الأدنى الممكن." : "Daily strict performance audits that prevent budget leakage and maximize cost-per-acquisition efficiency.")
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     3. CONTRAST CREAM ABOUT SECTION WITH OFFICIAL ORBITAL EMBLEM
+     ========================================== -->
+<section class="section-cream" id="about" aria-label="About Oxygen Marketing">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="section-badge mb-3">@Loc["NavAbout"]</div>
+        <h2 class="section-title text-start mb-4">
+          @(isAr ? "منهجنا في تحقيق النتائج" : "Our Results-Driven Methodology")
+        </h2>
+        <p class="fs-5 mb-4 text-muted-custom" style="line-height: 1.9;">
+          @(isAr ? Model.Settings.GetValueOrDefault("AboutText", "") : Model.Settings.GetValueOrDefault("AboutText", ""))
+        </p>
+        <p class="fw-bold fs-5 text-dark">
+          @(isAr ? "نحوّل الميزانية الإعلانية إلى قرارات مبنية على البيانات." : "We transform ad budgets into calculated data-driven decisions.")
+        </p>
+
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <div class="p-3 bg-white bg-opacity-75 rounded-3 shadow-sm border border-warning border-opacity-25 flex-grow-1">
+            <h5 class="h6 fw-bold mb-1 text-dark">@(isAr ? "جميع منصات التواصل" : "Omni-Channel Coverage")</h5>
+            <small class="text-muted">@(isAr ? "حضور احترافي متزامن على كافة المنصات" : "Unified presence across major digital touchpoints")</small>
+          </div>
+          <div class="p-3 bg-white bg-opacity-75 rounded-3 shadow-sm border border-warning border-opacity-25 flex-grow-1">
+            <h5 class="h6 fw-bold mb-1 text-dark">@(isAr ? "قياس مستمر للأداء" : "Measurable KPIs")</h5>
+            <small class="text-muted">@(isAr ? "تقارير شفافة ومؤشرات أداء واضحة" : "Direct attribution and transparent ROI metrics")</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 text-center">
+        <!-- Golden Translucent Motif Card from Profile with Embedded Official Logo -->
+        <div class="p-5 rounded-4 shadow-lg position-relative" style="background: rgba(255, 255, 255, 0.9); border: 2px solid rgba(199, 154, 59, 0.45); box-shadow: 0 25px 60px rgba(166, 116, 34, 0.15);">
+          <!-- Official Oxygen Orbital Emblem Component with revolving satellite and centered logo -->
+          <div class="oxygen-orbital-emblem mx-auto mb-4" role="img" aria-label="Oxygen Pure Consulting & Marketing Emblem">
+            <svg viewBox="0 0 200 200" class="orbital-ring-svg">
+              <defs>
+                <linearGradient id="creamGoldRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#A67422" />
+                  <stop offset="50%" stop-color="#FBD965" />
+                  <stop offset="100%" stop-color="#C79A3B" />
+                </linearGradient>
+                <filter id="goldGlowDot" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="3" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <!-- Outer Golden Orbit Ring -->
+              <circle cx="100" cy="100" r="76" fill="none" stroke="url(#creamGoldRing)" stroke-width="12" opacity="0.96" />
+              <!-- Inner Dashed Trajectory Ring -->
+              <circle cx="100" cy="100" r="56" fill="none" stroke="#C79A3B" stroke-width="1.8" stroke-dasharray="5 5" opacity="0.55" class="orbital-dashed-path" />
+              <!-- Satellite Electron Bead orbiting around the gold ring -->
+              <g class="orbital-bead-animator">
+                <circle cx="155" cy="50" r="10" fill="#FBD965" filter="url(#goldGlowDot)" />
+              </g>
+            </svg>
+            <!-- Official Oxygen Pure Consulting & Marketing Logo Perfectly Centered Inside the Golden Orbit -->
+            <div class="orbital-logo-core">
+              <img src="~/images/logo-official-dark.png" alt="OXYGEN pure Consulting & Marketing" />
+            </div>
+          </div>
+
+          <h3 class="h4 fw-bold text-dark mb-2">@(isAr ? "مؤسسة أكسجين للاستشارات والتسويق" : "Oxygen Consulting & Marketing")</h3>
+          <p class="text-muted small m-0 fw-semibold">Sweifieh, Amman, Jordan • الصويفية، عمّان</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     3.5 INTERACTIVE "BEFORE VS AFTER OXYGEN" SHOWCASE (THE WOW FACTOR)
+     ========================================== -->
+<section class="comparison-section" id="comparison" aria-label="Transformation: Before vs After Oxygen">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-badge mb-2">✦ THE TRANSFORMATION ✦</div>
+      <h2 class="section-title">@(isAr ? "الفارق الحقيقي: لماذا تختار أكسجين؟" : "The Tangible Impact: Why Oxygen?")</h2>
+      <p class="section-subtitle">@(isAr ? "مقارنة بالأرقام والنتائج بين إدارة الإعلانات العشوائية والعمل بمنهجية أكسجين الدقيقة" : "Direct comparison between traditional agency methods and Oxygen data-driven engineering")</p>
+
+      <!-- View Selector Buttons -->
+      <div class="d-inline-flex gap-2 p-1 rounded-pill mt-3 border border-secondary border-opacity-50" style="background: rgba(22, 17, 12, 0.9);">
+        <button type="button" class="btn btn-sm text-white px-3 py-2 rounded-pill comparison-view-toggle active" data-target="both">
+          @(isAr ? "المقارنة المزدوجة" : "Full Comparison")
+        </button>
+        <button type="button" class="btn btn-sm text-danger px-3 py-2 rounded-pill comparison-view-toggle" data-target="before">
+          @(isAr ? "بدون أكسجين" : "Without Oxygen")
+        </button>
+        <button type="button" class="btn btn-sm text-warning px-3 py-2 rounded-pill comparison-view-toggle" data-target="after">
+          @(isAr ? "مع أكسجين ✨" : "With Oxygen ✨")
+        </button>
+      </div>
+    </div>
+
+    <div class="row g-4 align-items-stretch">
+      <!-- Column 1: Without Oxygen (The Old / Generic Reality) -->
+      <div class="col-lg-6" id="comparison-col-before">
+        <div class="comparison-card-before">
+          <div class="d-flex align-items-center justify-content-between mb-4 pb-3 border-bottom border-danger border-opacity-25">
+            <div>
+              <span class="badge bg-danger bg-opacity-25 text-danger px-3 py-1 mb-2">الواقع الشائع</span>
+              <h3 class="h4 fw-bold text-white m-0">@(isAr ? "إدارة الإعلانات التقليدية" : "Traditional Ad Management")</h3>
+            </div>
+            <span class="fs-1 text-danger">⚠️</span>
+          </div>
+
+          <div class="comparison-point-bad">
+            <span class="text-danger fs-5">❌</span>
+            <div>
+              <strong class="text-white d-block">هدر مالي وتكلفة نقرة باهظة ($1.50 - $2.50 CPC)</strong>
+              <small class="text-white-50">صرف ميزانيات إعلانية على جماهير غير مهتمة واستنزاف الميزانية دون نتائج ملموسة.</small>
+            </div>
+          </div>
+
+          <div class="comparison-point-bad">
+            <span class="text-danger fs-5">❌</span>
+            <div>
+              <strong class="text-white d-block">إعلانات مكررة ومملة يتجاوزها الزبون</strong>
+              <small class="text-white-50">صور ثابتة خالية من القصة والإبداع، لا تخطف انتباه المشاهد في أول 3 ثوانٍ.</small>
+            </div>
+          </div>
+
+          <div class="comparison-point-bad">
+            <span class="text-danger fs-5">❌</span>
+            <div>
+              <strong class="text-white d-block">مبيعات ضعيفة وغياب الرسائل المباشرة</strong>
+              <small class="text-white-50">وصول أرقام مشاهدات وهمية دون محادثات واتساب حقيقية أو طلبات شراء فعلية.</small>
+            </div>
+          </div>
+
+          <div class="comparison-point-bad">
+            <span class="text-danger fs-5">❌</span>
+            <div>
+              <strong class="text-white d-block">تقارير مبهمة وتخمينات بدون أرقام حقيقية</strong>
+              <small class="text-white-50">تقارير شهرية متأخرة لا توضح عائد الاستثمار ROAS ولا كيف تم صرف الميزانية.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Column 2: With Oxygen Marketing (The High-ROAS System) -->
+      <div class="col-lg-6" id="comparison-col-after">
+        <div class="comparison-card-after">
+          <div class="d-flex align-items-center justify-content-between mb-4 pb-3 border-bottom border-warning border-opacity-25">
+            <div>
+              <span class="badge bg-warning bg-opacity-25 text-gold-light px-3 py-1 mb-2">منهجية أكسجين الدقيقة</span>
+              <h3 class="h4 fw-bold text-white m-0">@(isAr ? "مع مؤسسة أكسجين للتسويق" : "With Oxygen Consulting")</h3>
+            </div>
+            <span class="fs-1 text-gold-light">🚀</span>
+          </div>
+
+          <div class="comparison-point-good">
+            <span class="text-gold-light fs-5">✔</span>
+            <div>
+              <strong class="text-gold-light d-block">تكلفة نقرة منخفضة قياسية ($0.20 CPC)</strong>
+              <small class="text-cream-soft">تخفيض تكلفة الاستحواذ بنسبة تصل إلى 75% عبر إعادة توجيه الميزانيات لحظياً.</small>
+            </div>
+          </div>
+
+          <div class="comparison-point-good">
+            <span class="text-gold-light fs-5">✔</span>
+            <div>
+              <strong class="text-gold-light d-block">إنتاج سينمائي وسيناريوهات تصوير إبداعية</strong>
+              <small class="text-cream-soft">فيديوهات مصممة بأسلوب الخطاف (Hook Engineering) تجبر العميل على التوقف والشراء.</small>
+            </div>
+          </div>
+
+          <div class="comparison-point-good">
+            <span class="text-gold-light fs-5">✔</span>
+            <div>
+              <strong class="text-gold-light d-block">3,500+ محادثة مبيعات واستفسار موثقة</strong>
+              <small class="text-cream-soft">حملات مصممة لتحويل المشاهد فوراً إلى محادثة واتساب أو مكالمة مع فريق مبيعاتك.</small>
+            </div>
+          </div>
+
+          <div class="comparison-point-good">
+            <span class="text-gold-light fs-5">✔</span>
+            <div>
+              <strong class="text-gold-light d-block">شفافية رقمية كاملة 100% وعائد ROAS متضاعف</strong>
+              <small class="text-cream-soft">لوحة تحليلات تفاعلية توضح لك تكلفة كل محادثة وكل قرش أين ذهب بالتفصيل.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ornamental Geometric Divider -->
+<div class="ornament-divider" aria-hidden="true">
+  <svg viewBox="0 0 100 24">
+    <polygon points="50,2 62,12 50,22 38,12" />
+    <circle cx="20" cy="12" r="3" />
+    <circle cx="80" cy="12" r="3" />
+  </svg>
+</div>
+
+<!-- ==========================================
+     4. SERVICES SECTION
+     ========================================== -->
+<section class="py-5" id="services" aria-label="Marketing Services">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-badge">@Loc["ServicesSectionTitle"]</div>
+      <h2 class="section-title">@Loc["ServicesSectionSubtitle"]</h2>
+    </div>
+
+    <div class="row g-4">
+      @foreach (var s in Model.Services)
+      {
+        <div class="col-lg-4 col-md-6">
+          <div class="glass-card tilt-card h-100 d-flex flex-column justify-content-between">
+            <div>
+              <div class="d-flex align-items-center justify-content-between mb-4">
+                <div class="d-inline-flex align-items-center justify-content-center rounded-3 p-3" style="background: rgba(199, 154, 59, 0.15); border: 1px solid rgba(199, 154, 59, 0.35); width: 56px; height: 56px;">
+                  <span class="fs-4 text-gold-light">
+                    @switch (s.Icon)
+                    {
+                      case "compass": <span>🧭</span> break;
+                      case "sparkles": <span>✨</span> break;
+                      case "share-nodes": <span>🌐</span> break;
+                      case "bullhorn": <span>📢</span> break;
+                      case "chart-line": <span>📈</span> break;
+                      default: <span>✦</span> break;
+                    }
+                  </span>
+                </div>
+                <span class="badge rounded-pill bg-dark bg-opacity-75 border border-secondary text-gold-light px-3 py-1">0@(s.SortOrder)</span>
+              </div>
+              <h3 class="h5 fw-bold mb-3 text-white" style="font-family: var(--font-ar); letter-spacing: -0.01em;">@(isAr ? s.TitleAr : s.TitleEn)</h3>
+              <p class="service-card-desc">
+                @(isAr ? s.DescriptionAr : s.DescriptionEn)
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-top border-secondary border-opacity-25 d-flex align-items-center justify-content-between">
+              <span class="text-white-50 small">@(isAr ? "مشمول بالباقات" : "Available in Packages")</span>
+              <a href="#campaign-studio" class="text-gold-light text-decoration-none small fw-bold d-inline-flex align-items-center gap-1">
+                <span>@(isAr ? "احسب تكلفتها في الاستوديو" : "Configure in Studio")</span>
+                <span>@(isAr ? "←" : "→")</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     5. SCROLL STORYTELLING: WHAT HAPPENS AT OXYGEN?
+     ========================================== -->
+<section class="py-5 position-relative" id="scroll-story-section" aria-label="Our Process">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-badge">@Loc["HighlightsMethod"]</div>
+      <h2 class="section-title">@Loc["StoryTitle"]</h2>
+      <p class="section-subtitle">@Loc["StorySubtitle"]</p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Step 1: Strategy -->
+        <div class="glass-card story-card mb-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="badge bg-warning bg-opacity-25 text-gold-light fs-6 px-3 py-1">01. @Loc["Step1Title"]</span>
+            <span class="text-gold-light fs-3">🎯</span>
+          </div>
+          <p class="fs-5 text-cream-soft m-0">@Loc["Step1Desc"]</p>
+        </div>
+
+        <!-- Step 2: Content Creation -->
+        <div class="glass-card story-card mb-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="badge bg-warning bg-opacity-25 text-gold-light fs-6 px-3 py-1">02. @Loc["Step2Title"]</span>
+            <span class="text-gold-light fs-3">🎨</span>
+          </div>
+          <p class="fs-5 text-cream-soft m-0">@Loc["Step2Desc"]</p>
+        </div>
+
+        <!-- Step 3: Launch Campaigns -->
+        <div class="glass-card story-card mb-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="badge bg-warning bg-opacity-25 text-gold-light fs-6 px-3 py-1">03. @Loc["Step3Title"]</span>
+            <span class="text-gold-light fs-3">🚀</span>
+          </div>
+          <p class="fs-5 text-cream-soft m-0">@Loc["Step3Desc"]</p>
+        </div>
+
+        <!-- Step 4: Analyze & Scale -->
+        <div class="glass-card story-card mb-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <span class="badge bg-warning bg-opacity-25 text-gold-light fs-6 px-3 py-1">04. @Loc["Step4Title"]</span>
+            <span class="text-gold-light fs-3">📊</span>
+          </div>
+          <p class="fs-5 text-cream-soft m-0">@Loc["Step4Desc"]</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     6. BUILD-YOUR-CAMPAIGN STUDIO (THE HERO FEATURE)
+     ========================================== -->
+<section class="py-5" id="campaign-studio" aria-label="Campaign Studio Configurator">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-badge breathe-element">✦ THE STUDIO ✦</div>
+      <h2 class="section-title">@Loc["StudioTitle"]</h2>
+      <p class="section-subtitle">@Loc["StudioSubtitle"]</p>
+    </div>
+
+    <div class="studio-container">
+      <div class="row g-5 align-items-center">
+        <!-- Left Column: Configurator Options -->
+        <div class="col-lg-6">
+          <!-- 1. Platforms -->
+          <div class="mb-4">
+            <h4 class="h6 text-uppercase fw-bold text-gold-light mb-3">@Loc["StudioPlatforms"]</h4>
+            <div class="d-flex flex-wrap" role="group" aria-label="Platform Options">
+              <button type="button" class="studio-pill-option active" data-category="platform" data-value="Instagram" aria-pressed="true">Instagram</button>
+              <button type="button" class="studio-pill-option active" data-category="platform" data-value="Facebook" aria-pressed="true">Facebook</button>
+              <button type="button" class="studio-pill-option" data-category="platform" data-value="TikTok" aria-pressed="false">TikTok</button>
+              <button type="button" class="studio-pill-option" data-category="platform" data-value="Snapchat" aria-pressed="false">Snapchat</button>
+              <button type="button" class="studio-pill-option" data-category="platform" data-value="LinkedIn" aria-pressed="false">LinkedIn</button>
+              <button type="button" class="studio-pill-option" data-category="platform" data-value="X" aria-pressed="false">X (Twitter)</button>
+              <button type="button" class="studio-pill-option" data-category="platform" data-value="YouTube" aria-pressed="false">YouTube</button>
+            </div>
+          </div>
+
+          <!-- 2. Services -->
+          <div class="mb-4">
+            <h4 class="h6 text-uppercase fw-bold text-gold-light mb-3">@Loc["StudioServices"]</h4>
+            <div class="d-flex flex-wrap" role="group" aria-label="Service Options">
+              <button type="button" class="studio-pill-option active" data-category="service" data-value="paid_ads" aria-pressed="true">@(isAr ? "الحملات الإعلانية المدفوعة" : "Paid Ad Campaigns")</button>
+              <button type="button" class="studio-pill-option active" data-category="service" data-value="content_creation" aria-pressed="true">@(isAr ? "صناعة المحتوى الإبداعي" : "Creative Content")</button>
+              <button type="button" class="studio-pill-option" data-category="service" data-value="account_management" aria-pressed="false">@(isAr ? "إدارة الحسابات الشاملة" : "Account Management")</button>
+              <button type="button" class="studio-pill-option" data-category="service" data-value="analytics_reporting" aria-pressed="false">@(isAr ? "تحليل الأداء وإعداد التقارير" : "Analytics & Reporting")</button>
+            </div>
+          </div>
+
+          <!-- 3. Goal -->
+          <div class="mb-4">
+            <h4 class="h6 text-uppercase fw-bold text-gold-light mb-3">@Loc["StudioGoal"]</h4>
+            <div class="d-flex flex-wrap" role="group" aria-label="Goal Options">
+              <button type="button" class="studio-pill-option active" data-category="goal" data-value="messages" aria-pressed="true">@Loc["GoalMessages"]</button>
+              <button type="button" class="studio-pill-option" data-category="goal" data-value="awareness" aria-pressed="false">@Loc["GoalAwareness"]</button>
+              <button type="button" class="studio-pill-option" data-category="goal" data-value="sales" aria-pressed="false">@Loc["GoalSales"]</button>
+            </div>
+          </div>
+
+          <!-- Disclaimer -->
+          <p class="text-muted small mt-3" style="font-style: italic;">
+            ✦ @Loc["StudioDisclaimer"]
+          </p>
+        </div>
+
+        <!-- Right Column: Interactive Golden Glass Orbit & Live Summary -->
+        <div class="col-lg-6 text-center">
+          <!-- Dynamic Orbit Visualization -->
+          <div class="studio-orbit-visual">
+            <svg class="orbit-svg" viewBox="0 0 400 320" aria-label="Interactive Campaign Orbit">
+              <defs>
+                <linearGradient id="orbitRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#A67422" />
+                  <stop offset="50%" stop-color="#FBD965" />
+                  <stop offset="100%" stop-color="#C79A3B" />
+                </linearGradient>
+                <radialGradient id="centerCoreGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#FBD965" stop-opacity="0.3" />
+                  <stop offset="100%" stop-color="#A67422" stop-opacity="0" />
+                </radialGradient>
+              </defs>
+
+              <!-- Central Glowing Core -->
+              <circle cx="200" cy="160" r="50" fill="url(#centerCoreGlow)" />
+              <circle cx="200" cy="160" r="28" fill="#1C1812" stroke="#C79A3B" stroke-width="2" />
+              <text x="200" y="165" font-size="11" font-weight="700" fill="#FBD965" text-anchor="middle" font-family="Montserrat, sans-serif">OXYGEN</text>
+
+              <!-- Golden Orbital Rings -->
+              <ellipse cx="200" cy="160" rx="140" ry="75" fill="none" stroke="url(#orbitRingGrad)" stroke-width="2" opacity="0.6" stroke-dasharray="6 4" />
+              <ellipse cx="200" cy="160" rx="170" ry="92" fill="none" stroke="rgba(199, 154, 59, 0.2)" stroke-width="1.2" />
+
+              <!-- Nodes Container populated by studio.js -->
+              <g id="orbit-nodes-group"></g>
+            </svg>
+          </div>
+
+          <!-- Live Summary Cards -->
+          <div class="row g-3 mt-3">
+            <div class="col-4">
+              <div class="studio-result-card">
+                <small class="text-muted d-block mb-1">@Loc["EstBudget"]</small>
+                <div class="studio-metric-val" id="studio-budget-display">$650 – $1,100</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="studio-result-card">
+                <small class="text-muted d-block mb-1">@Loc["EstReach"]</small>
+                <div class="studio-metric-val" id="studio-reach-display">85K – 140K</div>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="studio-result-card">
+                <small class="text-muted d-block mb-1">@Loc["EstConversations"]</small>
+                <div class="studio-metric-val" id="studio-conv-display">1.8K – 3.2K</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Button to Request Package (Prefills Contact Form) -->
+          <div class="mt-4">
+            <button type="button" class="btn-gold w-100 py-3 fs-5" id="studio-request-package-btn">
+              <span>@Loc["RequestPackageBtn"]</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     7. BRAND PULSE RADAR & TELEMETRY DASHBOARD
+     ========================================== -->
+<section class="py-5" id="radar-section" aria-label="Brand Pulse Radar">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-badge">TELEMETRY</div>
+      <h2 class="section-title">@Loc["RadarTitle"]</h2>
+      <p class="section-subtitle">@Loc["RadarSubtitle"]</p>
+    </div>
+
+    <div class="row g-5 align-items-center" id="telemetry-dashboard">
+      <!-- Radar Sweep Visual -->
+      <div class="col-lg-6 text-center">
+        <div class="radar-box" id="brand-pulse-radar">
+          <svg viewBox="0 0 400 400" width="100%" height="100%" style="background: #14100B; border-radius: 50%; border: 2px solid rgba(199, 154, 59, 0.4); box-shadow: 0 0 40px rgba(0,0,0,0.8);">
+            <!-- Concentric Grid Rings -->
+            <circle cx="200" cy="200" r="160" fill="none" stroke="rgba(199, 154, 59, 0.2)" stroke-width="1" />
+            <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(199, 154, 59, 0.25)" stroke-width="1" />
+            <circle cx="200" cy="200" r="80" fill="none" stroke="rgba(199, 154, 59, 0.3)" stroke-width="1" />
+            <circle cx="200" cy="200" r="40" fill="none" stroke="rgba(199, 154, 59, 0.4)" stroke-width="1" />
+            <!-- Axis lines -->
+            <line x1="200" y1="20" x2="200" y2="380" stroke="rgba(199, 154, 59, 0.2)" stroke-width="1" />
+            <line x1="20" y1="200" x2="380" y2="200" stroke="rgba(199, 154, 59, 0.2)" stroke-width="1" />
+          </svg>
+
+          <!-- Sweeping Radar Beam -->
+          <div class="radar-sweep-line"></div>
+
+          <!-- Pulsing Blip Nodes from Empirical Case Studies -->
+          <div class="radar-blip" style="top: 30%; left: 65%;" data-title="@(isAr ? "قطاع الملابس" : "Fashion Apparel")" data-value="100,000 Reach" data-sub="CPC: $0.20 • 3,500 Convs"></div>
+          <div class="radar-blip" style="top: 70%; left: 75%;" data-title="@(isAr ? "عيادات التجميل" : "Beauty Clinics")" data-value="$0.20 CPC" data-sub="Creative Score: 75"></div>
+          <div class="radar-blip" style="top: 25%; left: 35%;" data-title="@(isAr ? "قطاع الإسكانات" : "Real Estate")" data-value="170,000 Reach" data-sub="3,000 Inquiries • CPC $0.50"></div>
+          <div class="radar-blip" style="top: 60%; left: 25%;" data-title="@(isAr ? "المركز التعليمي" : "Education Academy")" data-value="$0.70 CPC" data-sub="@(isAr ? "انخفاض من 2.0$" : "Reduced from $2.00")"></div>
+
+          <!-- Glass Tooltip Popover -->
+          <div id="radar-glass-tooltip" class="glass-card position-absolute p-3 text-start" style="opacity: 0; pointer-events: none; transition: all 0.2s ease; z-index: 10; min-width: 180px;">
+            <div id="radar-tooltip-title" class="fw-bold text-gold-light small"></div>
+            <div id="radar-tooltip-val" class="h5 fw-bold text-white my-1"></div>
+            <div id="radar-tooltip-sub" class="text-muted small"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dashboard Telemetry Cards & SVG Line Chart -->
+      <div class="col-lg-6">
+        <div class="glass-card p-4">
+          <h4 class="h5 fw-bold text-white mb-4">@(isAr ? "مؤشرات الأداء المعتمدة (KPIs)" : "Accredited Performance KPIs")</h4>
+
+          <!-- Live SVG Telemetry Chart -->
+          <div class="mb-4">
+            <svg viewBox="0 0 400 120" width="100%" height="90">
+              <defs>
+                <linearGradient id="chartGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#A67422" />
+                  <stop offset="50%" stop-color="#FBD965" />
+                  <stop offset="100%" stop-color="#C79A3B" />
+                </linearGradient>
+              </defs>
+              <!-- Grid Lines -->
+              <line x1="0" y1="30" x2="400" y2="30" stroke="#251F18" stroke-width="1" />
+              <line x1="0" y1="70" x2="400" y2="70" stroke="#251F18" stroke-width="1" />
+              <line x1="0" y1="110" x2="400" y2="110" stroke="#251F18" stroke-width="1" />
+              <!-- Animated Telemetry Curve -->
+              <path class="dashboard-chart-path" d="M 10 95 Q 80 85 140 50 T 260 40 T 390 15" fill="none" stroke="url(#chartGrad)" stroke-width="3" />
+            </svg>
+          </div>
+
+          <!-- KPI Metric Bars -->
+          <div class="mb-3">
+            <div class="d-flex justify-content-between small fw-bold mb-1">
+              <span>@(isAr ? "متوسط معدل التحسين في الحملات" : "Average Campaign Improvement")</span>
+              <span class="text-gold-light countup-val" data-target="76" data-suffix="%">0%</span>
+            </div>
+            <div class="progress bg-dark" style="height: 6px;">
+              <div class="progress-bar kpi-progress-fill bg-warning" data-width="76%" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="d-flex justify-content-between small fw-bold mb-1">
+              <span>@(isAr ? "انخفاض تكلفة النقرة (CPC)" : "CPC Optimization Efficiency")</span>
+              <span class="text-gold-light countup-val" data-target="65" data-suffix="%">0%</span>
+            </div>
+            <div class="progress bg-dark" style="height: 6px;">
+              <div class="progress-bar kpi-progress-fill bg-warning" data-width="65%" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="d-flex justify-content-between small fw-bold mb-1">
+              <span>@(isAr ? "معدل المحادثات المكتملة" : "Conversion Qualification Rate")</span>
+              <span class="text-gold-light countup-val" data-target="82" data-suffix="%">0%</span>
+            </div>
+            <div class="progress bg-dark" style="height: 6px;">
+              <div class="progress-bar kpi-progress-fill bg-warning" data-width="82%" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     8. FEATURED CASE STUDIES & PERFORMANCE
+     ========================================== -->
+<section class="py-5" id="portfolio" aria-label="Featured Case Studies">
+  <div class="container">
+    <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between mb-5">
+      <div>
+        <div class="section-badge">@Loc["CaseStudiesTitle"]</div>
+        <h2 class="section-title m-0">@Loc["CaseStudiesSubtitle"]</h2>
+      </div>
+      <a asp-controller="Home" asp-action="Portfolio" class="btn-glass mt-3 mt-md-0">
+        @Loc["ExploreWork"]
+      </a>
+    </div>
+
+    <!-- Delicate Animated Luxury Case Study Slider -->
+    <div class="delicate-slider-wrapper mb-5" aria-label="Delicate Animated Case Studies Slider">
+      <div class="delicate-slides-container">
+        @for (int i = 0; i < Model.FeaturedCases.Count; i++)
+        {
+          var c = Model.FeaturedCases[i];
+          <div class="delicate-slide @(i == 0 ? "active-slide" : "")" data-index="@i" aria-hidden="@(i == 0 ? "false" : "true")">
+            <div class="row g-4 align-items-center w-100 m-0">
+              <!-- Slide Left: Image Showcase -->
+              <div class="col-lg-6 p-0 pe-lg-4">
+                <div class="delicate-slide-img-box position-relative">
+                  <img src="@(c.ImagePath ?? "/images/cases/case-clothing.jpg")" alt="@(isAr ? c.TitleAr : c.TitleEn)" loading="lazy" />
+                  <div class="position-absolute top-0 end-0 m-3">
+                    <span class="badge px-3 py-2" style="background: rgba(14, 11, 8, 0.88); border: 1px solid var(--gold); color: var(--gold-light); font-size: 0.85rem; backdrop-filter: blur(8px);">
+                      @(isAr ? c.IndustryAr : c.IndustryEn)
+                    </span>
+                  </div>
+                  <div class="position-absolute bottom-0 start-0 m-3">
+                    <span class="badge px-3 py-1" style="background: rgba(251, 217, 101, 0.15); border: 1px solid rgba(251, 217, 101, 0.4); color: #FFF; font-size: 0.78rem;">
+                      @(isAr ? $"دراسة حالة مختارة #{i + 1}" : $"Featured Case #{i + 1}")
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide Right: Data & Narrative -->
+              <div class="col-lg-6 p-0 ps-lg-4">
+                <div class="d-inline-flex align-items-center gap-2 section-badge mb-2">
+                  <span class="text-gold">✦</span>
+                  <span>@(isAr ? c.IndustryAr : c.IndustryEn)</span>
+                </div>
+                <h3 class="h3 fw-bold text-white mb-3" style="font-family: var(--font-ar); line-height: 1.35;">
+                  @(isAr ? c.TitleAr : c.TitleEn)
+                </h3>
+                <p class="text-cream-soft mb-4" style="line-height: 1.7; font-size: 0.98rem;">
+                  @(isAr ? c.DescriptionAr : c.DescriptionEn)
+                </p>
+
+                <!-- High-Impact KPI Metrics Row -->
+                <div class="row g-2 mb-4">
+                  @if (c.Reach.HasValue)
+                  {
+                    <div class="col-4">
+                      <div class="delicate-kpi-pill">
+                        <small class="text-white-50 d-block mb-1" style="font-size: 0.75rem;">@(isAr ? "الوصول" : "Reach")</small>
+                        <span class="fw-bold text-gold-light fs-5">@c.Reach.Value.ToString("N0")</span>
+                      </div>
+                    </div>
+                  }
+                  @if (c.Conversations.HasValue)
+                  {
+                    <div class="col-4">
+                      <div class="delicate-kpi-pill">
+                        <small class="text-white-50 d-block mb-1" style="font-size: 0.75rem;">@(isAr ? "المحادثات" : "Convs")</small>
+                        <span class="fw-bold text-gold-light fs-5">@c.Conversations.Value.ToString("N0")</span>
+                      </div>
+                    </div>
+                  }
+                  @if (c.Cpc.HasValue)
+                  {
+                    <div class="col-4">
+                      <div class="delicate-kpi-pill">
+                        <small class="text-white-50 d-block mb-1" style="font-size: 0.75rem;">@(isAr ? "تكلفة النقرة" : "CPC")</small>
+                        <span class="fw-bold text-gold-light fs-5">$@c.Cpc.Value.ToString("F2")</span>
+                      </div>
+                    </div>
+                  }
+                </div>
+
+                <div class="d-flex align-items-center gap-3">
+                  <a asp-controller="Home" asp-action="CaseStudy" asp-route-id="@c.Id" class="btn-gold px-4 py-2">
+                    <span>@Loc["ViewCaseDetails"]</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                  </a>
+                  @if (c.Budget.HasValue)
+                  {
+                    <span class="text-white-50 small">
+                      @(isAr ? "الميزانية:" : "Budget:") <strong class="text-white">$@c.Budget.Value.ToString("N0")</strong>
+                    </span>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Slider Controls: Arrows & Animated Dots -->
+      <div class="delicate-slider-nav">
+        <button type="button" class="delicate-nav-btn delicate-prev-btn" aria-label="@(isAr ? "السابق" : "Previous")">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="@(isAr ? "9 18 15 12 9 6" : "15 18 9 12 15 6")"></polyline></svg>
+        </button>
+
+        <div class="delicate-slider-dots">
+          @for (int i = 0; i < Model.FeaturedCases.Count; i++)
+          {
+            <div class="delicate-slider-dot @(i == 0 ? "active" : "")" data-index="@i" role="button" aria-label="Go to slide @(i + 1)"></div>
+          }
+        </div>
+
+        <button type="button" class="delicate-nav-btn delicate-next-btn" aria-label="@(isAr ? "التالي" : "Next")">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="@(isAr ? "15 18 9 12 15 6" : "9 18 15 12 9 6")"></polyline></svg>
+        </button>
+      </div>
+
+      <!-- Animated Progress Bar Indicator -->
+      <div class="delicate-slider-progress-track">
+        <div class="delicate-slider-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     9. FINAL DRAMATIC CTA: LET YOUR BRAND BREATHE
+     ========================================== -->
+<section class="py-5 text-center position-relative overflow-hidden" style="background: radial-gradient(circle at 50% 50%, #291F13 0%, #100D09 80%); border-top: 1px solid rgba(199, 154, 59, 0.25);">
+  <div class="container position-relative py-5" style="z-index: 2;">
+    <!-- Large breathing glowing ring motif -->
+    <div class="breathe-element mb-3">
+      <svg width="120" height="120" viewBox="0 0 140 140" class="mx-auto">
+        <circle cx="70" cy="70" r="50" fill="none" stroke="url(#preloaderGold)" stroke-width="8" opacity="0.8" />
+      </svg>
+    </div>
+
+    <div class="display-statement">
+      @(isAr ? "دع علامتك تتنفس" : "Let Your Brand Breathe")
+    </div>
+    <p class="fs-5 text-cream-soft mx-auto mb-4" style="max-width: 650px;">
+      @Loc["FinalCtaSubtitle"]
+    </p>
+
+    <div class="d-flex justify-content-center gap-3">
+      <a href="#contact" class="btn-gold fs-5 px-5 py-3">
+        @Loc["GetInTouch"]
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     10. CONTACT SECTION WITH PROGRESSIVE FORM
+     ========================================== -->
+<section class="py-5" id="contact" aria-label="Contact Oxygen Marketing">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="section-badge">@Loc["NavContact"]</div>
+      <h2 class="section-title">@Loc["ContactTitle"]</h2>
+      <p class="section-subtitle">@Loc["ContactSubtitle"]</p>
+    </div>
+
+    <div class="row g-5">
+      <!-- Contact Form Column -->
+      <div class="col-lg-7">
+        <div class="glass-card p-4 p-md-5">
+          <!-- Alert status box -->
+          <div id="contact-alert-box" style="display: none;" role="alert"></div>
+
+          <form id="oxygen-contact-form" asp-controller="Home" asp-action="Contact" method="post">
+            @Html.AntiForgeryToken()
+
+            <!-- Hidden Honeypot for automated spam bots -->
+            <div class="honeypot-field">
+              <label for="Website">Do not fill this field</label>
+              <input type="text" id="Website" name="Website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <!-- Hidden Campaign Details from Studio -->
+            <input type="hidden" id="campaign-details-hidden" name="CampaignDetails" value="" />
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label-custom" for="Name">@Loc["FormName"] *</label>
+                <input type="text" id="Name" name="Name" class="form-control-custom" required minlength="2" maxlength="100" placeholder="@(isAr ? "أحمد المحترم" : "John Doe")" />
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-custom" for="Phone">@Loc["FormPhone"] *</label>
+                <input type="tel" id="Phone" name="Phone" class="form-control-custom" required maxlength="30" placeholder="+962 7 9000 0000" dir="ltr" />
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-custom" for="Email">@Loc["FormEmail"] *</label>
+                <input type="email" id="Email" name="Email" class="form-control-custom" required maxlength="150" placeholder="name@company.com" dir="ltr" />
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-custom" for="Company">@Loc["FormCompany"]</label>
+                <input type="text" id="Company" name="Company" class="form-control-custom" maxlength="100" placeholder="@(isAr ? "اسم علامتك التجارية" : "Brand or Agency")" />
+              </div>
+
+              <div class="col-12">
+                <label class="form-label-custom" for="ServiceId">@Loc["FormService"]</label>
+                <select id="ServiceId" name="ServiceId" class="form-select-custom">
+                  <option value="">@Loc["FormSelectService"]</option>
+                  @foreach (var s in Model.Services)
+                  {
+                    <option value="@s.Id">@(isAr ? s.TitleAr : s.TitleEn)</option>
+                  }
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label-custom" for="contact-message-input">@Loc["FormMessage"] *</label>
+                <textarea id="contact-message-input" name="Message" rows="5" class="form-control-custom" required minlength="5" maxlength="3000" placeholder="@(isAr ? "اكتب تفاصيل حملتك أو استفسارك هنا..." : "Tell us about your campaign goals, target audience, or requirements...")"></textarea>
+              </div>
+
+              <div class="col-12 mt-4">
+                <button type="submit" class="btn-gold w-100 py-3 fs-5">
+                  <span>@Loc["FormSubmit"]</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Contact Info & Google Map Column -->
+      <div class="col-lg-5">
+        <div class="glass-card p-4 p-md-5 h-100 d-flex flex-column justify-content-between">
+          <div>
+            <h3 class="h4 fw-bold text-white mb-4">@(isAr ? "مقرنا في عمّان" : "Headquarters in Amman")</h3>
+            <ul class="list-unstyled text-cream-soft" style="line-height: 2.2;">
+              <li class="d-flex align-items-center gap-3 mb-2">
+                <span class="fs-4 text-gold-light">📍</span>
+                <span>@Model.Settings.GetValueOrDefault("Address", "Sweifieh, Amman, Jordan")</span>
+              </li>
+              <li class="d-flex align-items-center gap-3 mb-2">
+                <span class="fs-4 text-gold-light">📞</span>
+                <a href="tel:@Model.Settings.GetValueOrDefault("Phone", "+962796690421")" class="text-cream-soft text-decoration-none" dir="ltr">
+                  @Model.Settings.GetValueOrDefault("Phone", "+962796690421")
+                </a>
+              </li>
+              <li class="d-flex align-items-center gap-3 mb-2">
+                <span class="fs-4 text-gold-light">✉️</span>
+                <a href="mailto:@Model.Settings.GetValueOrDefault("Email", "infooxygenmedia2022@gmail.com")" class="text-cream-soft text-decoration-none">
+                  @Model.Settings.GetValueOrDefault("Email", "infooxygenmedia2022@gmail.com")
+                </a>
+              </li>
+            </ul>
+
+            <!-- Social Links (Facebook & Instagram ONLY) -->
+            <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
+              <span class="small text-muted d-block mb-3">@(isAr ? "تابعنا على المنصات الرسمية:" : "Follow our official channels:")</span>
+              <div class="d-flex gap-2">
+                <a href="@Model.Settings.GetValueOrDefault("FacebookUrl", "https://www.facebook.com/oxygenmedia2022/")" target="_blank" rel="noopener noreferrer" class="btn-glass py-2 px-3">
+                  Facebook
+                </a>
+                <a href="@Model.Settings.GetValueOrDefault("InstagramUrl", "https://www.instagram.com/oxygen_consulting__marketing")" target="_blank" rel="noopener noreferrer" class="btn-glass py-2 px-3">
+                  Instagram
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Google Maps Iframe Embed for Sweifieh, Amman, Jordan -->
+          <div class="mt-4 rounded-3 overflow-hidden border border-secondary border-opacity-25" style="height: 220px;">
+            <iframe 
+              src="@Model.Settings.GetValueOrDefault("GoogleMapsEmbed", "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13543.123562635952!2d35.859666!3d31.954881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151ca118b62dbd63%3A0xe54d9c490cba7fe7!2sAs-Suwayfiyyah%2C%20Amman!5e0!3m2!1sen!2sjo!4v1700000000000!5m2!1sen!2sjo")" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Oxygen Office Location in Sweifieh, Amman">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+@section Scripts {
+  <!-- Home Page Specific Three.js and Studio Interactive scripts -->
+  <script type="module" src="~/js/hero3d.js" asp-append-version="true"></script>
+  <script src="~/js/studio.js" asp-append-version="true"></script>
+  <script src="~/js/scrollStory.js" asp-append-version="true"></script>
+  <script src="~/js/radar.js" asp-append-version="true"></script>
+}

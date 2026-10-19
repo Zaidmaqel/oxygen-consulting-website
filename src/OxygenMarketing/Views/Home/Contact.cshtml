@@ -1,0 +1,172 @@
+@model OxygenMarketing.ViewModels.ContactFormViewModel
+@using System.Globalization
+@{
+    var isAr = CultureInfo.CurrentUICulture.Name.StartsWith("ar");
+    ViewData["Title"] = isAr ? "اتصل بنا | مؤسسة أكسجين للاستشارات والتسويق" : "Contact Us | Oxygen Consulting & Marketing";
+    ViewData["MetaDescription"] = isAr
+        ? "تواصل مع فريق أكسجين للاستشارات والتسويق في الصويفية، عمّان. هاتف وواتساب: +962796690421. نساعدك في تصميم وإطلاق حملات تسويقية ناجحة."
+        : "Contact Oxygen Consulting & Marketing in Sweifieh, Amman. Tel/WhatsApp: +962796690421. Let's design and scale your next marketing campaign.";
+
+    var services = ViewBag.Services as List<OxygenMarketing.Models.Service> ?? new List<OxygenMarketing.Models.Service>();
+    var settings = ViewBag.Settings as Dictionary<string, OxygenMarketing.Models.SiteSetting> ?? new Dictionary<string, OxygenMarketing.Models.SiteSetting>();
+
+    var phone = settings.ContainsKey("Phone") ? (isAr ? settings["Phone"].ValueAr : settings["Phone"].ValueEn) : "+962796690421";
+    var email = settings.ContainsKey("Email") ? (isAr ? settings["Email"].ValueAr : settings["Email"].ValueEn) : "infooxygenmedia2022@gmail.com";
+    var address = settings.ContainsKey("Address") ? (isAr ? settings["Address"].ValueAr : settings["Address"].ValueEn) : "Sweifieh, Amman, Jordan";
+    var fbUrl = settings.ContainsKey("FacebookUrl") ? settings["FacebookUrl"].ValueAr : "https://www.facebook.com/oxygenmedia2022/";
+    var igUrl = settings.ContainsKey("InstagramUrl") ? settings["InstagramUrl"].ValueAr : "https://www.instagram.com/oxygen_consulting__marketing";
+    var mapEmbed = settings.ContainsKey("GoogleMapsEmbed") ? settings["GoogleMapsEmbed"].ValueAr : "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13543.123562635952!2d35.859666!3d31.954881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151ca118b62dbd63%3A0xe54d9c490cba7fe7!2sAs-Suwayfiyyah%2C%20Amman!5e0!3m2!1sen!2sjo!4v1700000000000!5m2!1sen!2sjo";
+}
+
+<!-- Page Header Hero -->
+<section class="py-5 text-center position-relative" style="padding-top: 130px !important; background: radial-gradient(circle at 50% 30%, #261D12 0%, var(--dark) 75%);">
+  <div class="container py-4">
+    <div class="section-badge">@Loc["NavContact"]</div>
+    <h1 class="display-4 fw-bold text-white mb-3">@Loc["ContactTitle"]</h1>
+    <p class="fs-5 text-cream-soft mx-auto" style="max-width: 750px;">
+      @Loc["ContactSubtitle"]
+    </p>
+  </div>
+</section>
+
+<!-- Contact Form and Details Section -->
+<section class="py-5">
+  <div class="container py-4">
+    @if (TempData["SuccessMessage"] != null)
+    {
+      <div class="alert alert-success fs-5 p-4 mb-5 text-center shadow" role="alert">
+        @TempData["SuccessMessage"]
+      </div>
+    }
+
+    <div class="row g-5">
+      <!-- Form Column -->
+      <div class="col-lg-7">
+        <div class="glass-card p-4 p-md-5">
+          <h2 class="h4 fw-bold text-white mb-4">@(isAr ? "أرسل لنا استفسارك أو تفاصيل حملتك" : "Send Us Your Inquiry or Campaign Brief")</h2>
+
+          <div id="contact-alert-box" style="display: none;" role="alert"></div>
+
+          <form id="oxygen-contact-form" asp-action="Contact" method="post">
+            @Html.AntiForgeryToken()
+
+            <!-- Anti-Spam Honeypot -->
+            <div class="honeypot-field">
+              <label for="Website">Do not fill this field</label>
+              <input type="text" id="Website" name="Website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <input type="hidden" id="campaign-details-hidden" name="CampaignDetails" value="" />
+
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label-custom" for="Name">@Loc["FormName"] *</label>
+                <input type="text" id="Name" name="Name" class="form-control-custom" required minlength="2" maxlength="100" placeholder="@(isAr ? "أحمد المحترم" : "John Doe")" value="@Model.Name" />
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-custom" for="Phone">@Loc["FormPhone"] *</label>
+                <input type="tel" id="Phone" name="Phone" class="form-control-custom" required maxlength="30" placeholder="+962 7 9000 0000" dir="ltr" value="@Model.Phone" />
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-custom" for="Email">@Loc["FormEmail"] *</label>
+                <input type="email" id="Email" name="Email" class="form-control-custom" required maxlength="150" placeholder="name@company.com" dir="ltr" value="@Model.Email" />
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label-custom" for="Company">@Loc["FormCompany"]</label>
+                <input type="text" id="Company" name="Company" class="form-control-custom" maxlength="100" placeholder="@(isAr ? "اسم الشركة أو البراند" : "Brand or Agency")" value="@Model.Company" />
+              </div>
+
+              <div class="col-12">
+                <label class="form-label-custom" for="ServiceId">@Loc["FormService"]</label>
+                <select id="ServiceId" name="ServiceId" class="form-select-custom">
+                  <option value="">@Loc["FormSelectService"]</option>
+                  @foreach (var s in services)
+                  {
+                    <option value="@s.Id" selected="@(Model.ServiceId == s.Id)">@(isAr ? s.TitleAr : s.TitleEn)</option>
+                  }
+                </select>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label-custom" for="contact-message-input">@Loc["FormMessage"] *</label>
+                <textarea id="contact-message-input" name="Message" rows="5" class="form-control-custom" required minlength="5" maxlength="3000" placeholder="@(isAr ? "تفاصيل رسالتك أو متطلبات حملتك الإعلانية..." : "Your project requirements, budget, or inquiry...")">@Model.Message</textarea>
+              </div>
+
+              <div class="col-12 mt-4">
+                <button type="submit" class="btn-gold w-100 py-3 fs-5">
+                  <span>@Loc["FormSubmit"]</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Contact Coordinates & Map Column -->
+      <div class="col-lg-5">
+        <div class="glass-card p-4 p-md-5 h-100 d-flex flex-column justify-content-between">
+          <div>
+            <h2 class="h4 fw-bold text-white mb-4">@(isAr ? "معلومات التواصل المباشر" : "Direct Contact Details")</h2>
+
+            <ul class="list-unstyled text-cream-soft" style="line-height: 2.3;">
+              <li class="d-flex align-items-center gap-3 mb-3">
+                <span class="fs-4 text-gold-light">📍</span>
+                <div>
+                  <strong class="d-block text-white">@(isAr ? "العنوان:" : "Location:")</strong>
+                  <span>@address</span>
+                </div>
+              </li>
+
+              <li class="d-flex align-items-center gap-3 mb-3">
+                <span class="fs-4 text-gold-light">📞</span>
+                <div>
+                  <strong class="d-block text-white">@(isAr ? "الهاتف والواتساب:" : "Phone & WhatsApp:")</strong>
+                  <a href="tel:@phone" class="text-cream-soft text-decoration-none" dir="ltr">@phone</a>
+                </div>
+              </li>
+
+              <li class="d-flex align-items-center gap-3 mb-3">
+                <span class="fs-4 text-gold-light">✉️</span>
+                <div>
+                  <strong class="d-block text-white">@(isAr ? "البريد الإلكتروني:" : "Email:")</strong>
+                  <a href="mailto:@email" class="text-cream-soft text-decoration-none">@email</a>
+                </div>
+              </li>
+            </ul>
+
+            <!-- Social Media Channels (Facebook & Instagram ONLY) -->
+            <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
+              <span class="small text-muted d-block mb-3">@(isAr ? "قنوات التواصل الرسمية المعتمدة:" : "Official verified social channels:")</span>
+              <div class="d-flex gap-2">
+                <a href="@fbUrl" target="_blank" rel="noopener noreferrer" class="btn-glass py-2 px-3">
+                  Facebook Page
+                </a>
+                <a href="@igUrl" target="_blank" rel="noopener noreferrer" class="btn-glass py-2 px-3">
+                  Instagram
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Google Maps Iframe Embed -->
+          <div class="mt-4 rounded-3 overflow-hidden border border-secondary border-opacity-25" style="height: 240px;">
+            <iframe 
+              src="@mapEmbed" 
+              width="100%" 
+              height="100%" 
+              style="border:0;" 
+              allowfullscreen="" 
+              loading="lazy" 
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Oxygen Marketing Office Location in Sweifieh, Amman">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

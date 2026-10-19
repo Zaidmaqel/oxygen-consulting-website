@@ -1,0 +1,144 @@
+@model OxygenMarketing.ViewModels.CaseStudyDetailViewModel
+@using System.Globalization
+@{
+    var isAr = CultureInfo.CurrentUICulture.Name.StartsWith("ar");
+    var c = Model.CaseStudy;
+    ViewData["Title"] = $"{(isAr ? c.TitleAr : c.TitleEn)} | Oxygen Marketing";
+    ViewData["MetaDescription"] = isAr ? c.DescriptionAr : c.DescriptionEn;
+}
+
+<!-- Case Header Hero -->
+<section class="py-5 text-center position-relative" style="padding-top: 130px !important; background: radial-gradient(circle at 50% 30%, #261D12 0%, var(--dark) 75%);">
+  <div class="container py-4">
+    <div class="d-inline-flex align-items-center gap-2 section-badge mb-3">
+      <span>@(isAr ? c.IndustryAr : c.IndustryEn)</span>
+    </div>
+    <h1 class="display-4 fw-bold text-white mb-3">@(isAr ? c.TitleAr : c.TitleEn)</h1>
+    <p class="fs-5 text-cream-soft mx-auto" style="max-width: 750px;">
+      @(isAr ? c.DescriptionAr : c.DescriptionEn)
+    </p>
+  </div>
+</section>
+
+<!-- Main Details Section -->
+<section class="py-5">
+  <div class="container py-4">
+    <div class="row g-5">
+      <!-- Left Column: Story, Objectives, and Execution (from PDF pages 6-9) -->
+      <div class="col-lg-7">
+        <!-- Visual Banner -->
+        <div class="glass-card p-0 overflow-hidden mb-5">
+          <img src="@(c.ImagePath ?? "/images/cases/case-clothing.jpg")" alt="@(isAr ? c.TitleAr : c.TitleEn)" class="img-fluid w-100" style="max-height: 380px; object-fit: cover;" />
+        </div>
+
+        <!-- Strategy Details -->
+        <div class="glass-card mb-4">
+          <h2 class="h5 fw-bold text-gold-light mb-3">@(isAr ? "الهدف والتحدي الأولي" : "Objective & Challenge")</h2>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="p-3 bg-dark rounded-3 border border-secondary border-opacity-25">
+                <span class="text-muted small d-block mb-1">@(isAr ? "الهدف الأساسي" : "Primary Objective")</span>
+                <span class="fw-bold text-white fs-6">@(isAr ? "زيادة المبيعات والمحادثات المباشرة" : "Scale Sales & Direct Messaging Inquiries")</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 bg-dark rounded-3 border border-secondary border-opacity-25">
+                <span class="text-muted small d-block mb-1">@(isAr ? "التحدي التسويقي" : "Marketing Challenge")</span>
+                <span class="fw-bold text-white fs-6">@(isAr ? "ارتفاع تكلفة النتيجة وضعف معدل التحويل" : "High Initial Cost-Per-Result & Low Conversion")</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Actions Taken (from PDF) -->
+        <div class="glass-card mb-4">
+          <h2 class="h5 fw-bold text-gold-light mb-3">@(isAr ? "ما قمنا به في أكسجين" : "The Oxygen Intervention")</h2>
+          <ul class="list-unstyled text-cream-soft" style="line-height: 2;">
+            <li class="d-flex align-items-center gap-2 mb-2">
+              <span class="text-gold-light">✔</span>
+              <span>@(isAr ? "إعادة هيكلة الحملات الإعلانية وتوزيع الميزانية بناءً على الأداء." : "Complete restructuring of ad campaigns and performance-weighted budget reallocation.")</span>
+            </li>
+            <li class="d-flex align-items-center gap-2 mb-2">
+              <span class="text-gold-light">✔</span>
+              <span>@(isAr ? "تقسيم دقيق لشرائح الجماهير المستهدفة وبناء جماهير مشابهة (Lookalike)." : "Granular audience segmentation and custom lookalike audience generation.")</span>
+            </li>
+            <li class="d-flex align-items-center gap-2 mb-2">
+              <span class="text-gold-light">✔</span>
+              <span>@(isAr ? "اختبار متقدم للتصاميم الإعلانية (Creatives A/B Testing) لاختيار الأقوى تأثيراً." : "Multi-creative A/B variant testing to isolate peak-converting visual formats.")</span>
+            </li>
+            <li class="d-flex align-items-center gap-2 mb-2">
+              <span class="text-gold-light">✔</span>
+              <span>@(isAr ? "إعادة توجيه الإنفاق يومياً نحو المجموعات الأكثر تحقيقاً للمبيعات والمحادثات." : "Daily telemetry tracking to funnel ad dollars into peak-converting ad groups.")</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Column: Key Performance Indicator (KPI) Badges & Action -->
+      <div class="col-lg-5">
+        <div class="glass-card p-4 p-md-5 sticky-top" style="top: 100px;">
+          <h2 class="h4 fw-bold text-white mb-4">@(isAr ? "مؤشرات الأداء المحققة" : "Empirical KPI Results")</h2>
+
+          <div class="row g-3 mb-4">
+            @if (c.Budget.HasValue)
+            {
+              <div class="col-6">
+                <div class="p-3 bg-dark rounded-3 border border-secondary border-opacity-25 text-center">
+                  <small class="text-muted d-block mb-1">@(isAr ? "الميزانية المدارة" : "Managed Spend")</small>
+                  <span class="h4 fw-bold text-gold-light m-0">$@c.Budget.Value.ToString("N0")</span>
+                </div>
+              </div>
+            }
+
+            @if (c.Reach.HasValue)
+            {
+              <div class="col-6">
+                <div class="p-3 bg-dark rounded-3 border border-secondary border-opacity-25 text-center">
+                  <small class="text-muted d-block mb-1">@(isAr ? "إجمالي الوصول" : "Total Reach")</small>
+                  <span class="h4 fw-bold text-gold-light m-0">@c.Reach.Value.ToString("N0")</span>
+                </div>
+              </div>
+            }
+
+            @if (c.Conversations.HasValue)
+            {
+              <div class="col-6">
+                <div class="p-3 bg-dark rounded-3 border border-secondary border-opacity-25 text-center">
+                  <small class="text-muted d-block mb-1">@(isAr ? "المحادثات المباشرة" : "Direct Inquiries")</small>
+                  <span class="h4 fw-bold text-gold-light m-0">@c.Conversations.Value.ToString("N0")</span>
+                </div>
+              </div>
+            }
+
+            @if (c.Cpc.HasValue)
+            {
+              <div class="col-6">
+                <div class="p-3 bg-dark rounded-3 border border-secondary border-opacity-25 text-center">
+                  <small class="text-muted d-block mb-1">@(isAr ? "تكلفة النقرة (CPC)" : "Optimized CPC")</small>
+                  <span class="h4 fw-bold text-gold-light m-0">$@c.Cpc.Value.ToString("F2")</span>
+                </div>
+              </div>
+            }
+
+            @if (c.ExtraPercent.HasValue)
+            {
+              <div class="col-12">
+                <div class="p-3 bg-warning bg-opacity-10 rounded-3 border border-warning border-opacity-30 text-center">
+                  <small class="text-gold-light d-block mb-1">@(isAr ? "معدل التحسين الإجمالي" : "Overall Improvement")</small>
+                  <span class="h3 fw-bold text-gold-light m-0">+@c.ExtraPercent.Value.ToString("N0")%</span>
+                </div>
+              </div>
+            }
+          </div>
+
+          <a href="/#campaign-studio" class="btn-gold w-100 py-3 mb-3 text-center">
+            @Loc["BuildCampaign"]
+          </a>
+          <a asp-controller="Home" asp-action="Portfolio" class="btn-glass w-100 text-center py-2">
+            ← @(isAr ? "العودة إلى جميع دراسات الحالة" : "Back to All Case Studies")
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
