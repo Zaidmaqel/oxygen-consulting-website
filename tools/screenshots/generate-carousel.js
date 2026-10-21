@@ -799,10 +799,10 @@ async function buildCarouselPdf() {
         <div style="font-size: 22px; font-weight: 800; color: #FBD965; font-family: 'Fira Code', monospace; letter-spacing: -0.01em;">github.com/Zaidmaqel/oxygen-consulting-website</div>
       </div>
 
-      <!-- LinkedIn Placeholder Card -->
+      <!-- LinkedIn Profile Card -->
       <div class="glass-card" style="display: inline-block; padding: 22px 36px; margin-bottom: 28px; border-color: rgba(199, 154, 59, 0.4); text-align: center; width: 100%; max-width: 820px;">
         <div style="font-size: 14px; color: #8F8474; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px;">LinkedIn Profile</div>
-        <div style="font-size: 22px; font-weight: 700; color: #FAF6EE; font-family: 'Fira Code', monospace; letter-spacing: 0.02em;">linkedin.com/in/YOUR-HANDLE</div>
+        <div style="font-size: 22px; font-weight: 700; color: #FAF6EE; font-family: 'Fira Code', monospace; letter-spacing: 0.02em;">linkedin.com/in/zaid-muaiql</div>
       </div>
 
       <!-- AI-Assistance Disclosure -->
