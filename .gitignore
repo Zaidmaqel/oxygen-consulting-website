@@ -527,8 +527,12 @@ _UpgradeReport_Files/
 *.bak
 *.backup
 
-# Social media video binaries (large media files)
+# Social media binaries (large media files: video recordings, PDF carousels, preview frames)
 social/*.mp4
 **/social/*.mp4
+social/*.pdf
+**/social/*.pdf
+social/preview/
+**/social/preview/
 
 
